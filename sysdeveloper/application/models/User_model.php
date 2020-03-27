@@ -9,15 +9,45 @@ class User_model extends CI_Model
         parent::__construct();
     }
 
-    public function getUsers($uri = false)
+    public function getUsers($uri = false, $level, $id)
     {
+        //var_dump($uri, $level, $id);
+        //die;
         if ($uri === false) :
-            $query = $this->db->get($this->table);
-            return $query->result_array();
+            $query = $this->db->select('u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final')
+                ->from($this->table . ' AS u')
+                ->join('tb_permission_groups AS g', 'u.user_level = g.g_id', 'inner')
+                ->join('tb_online AS o', 'u.user_id = o.on_id_user', 'inner')
+                ->join('tb_status AS s', 'u.user_status = s.st_id', 'inner')
+                ->where("g.g_name = 'Admin Senior' AND u.user_id = {$id}")
+                ->or_where('g.g_name', 'Administrador(a)')
+                ->or_where('g.g_name', 'Supervisor(a)')
+                ->or_where('g.g_name', 'Gerente')
+                ->or_where('g.g_name', 'Usuário')
+                ->or_where('g.g_name', 'Editor(a)')
+                ->or_where('g.g_name', 'Editor(a)')
+                ->order_by('u.user_name', 'ASC');
+            return $this->db->get()->result_array();
+
         else :
             $query = $this->db->get_where($this->table, array('user_url' => $uri));
             return $query->row();
         endif;
+
+        /*
+        SELECT u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final 
+        FROM tb_user AS u 
+        INNER JOIN tb_permission_groups AS g ON g.g_id = u.user_level 
+        INNER JOIN tb_status AS s ON s.st_id = u.user_status 
+        INNER JOIN tb_online AS o ON o.on_id_user = u.user_id 
+        WHERE g.g_name = 'Administrador(a)' 
+        OR g.g_name = 'Supervisor(a)' 
+        OR g.g_name = 'Gerente' 
+        OR g.g_name = 'Usuário' 
+        OR g.g_name = 'Editor(a)' 
+        OR (g.g_name = 'Admin Senior' AND u.user_id = 1) 
+        ORDER BY user_name ASC
+        */
     }
 
     //BUSCA USUARIO PELO ID
@@ -59,9 +89,9 @@ class User_model extends CI_Model
         unset($data['on_id_user']);
         $this->db->update('tb_online', $data);
 
-        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0):
+        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0) :
             return true;
-        else:
+        else :
             return false;
         endif;
     }
@@ -99,7 +129,7 @@ class User_model extends CI_Model
             ];
 
             $this->updateOnline($data);
-            
+
             session_destroy();
             redirect('admin/login', 'refresh');
             die;

@@ -8,6 +8,25 @@ DEFAULT
 
 
 /*
+BREADCRUMB
+*/
+
+.dash_breadcrumb.row {
+    margin-right: 0;
+}
+
+.dash_breadcrumb {
+    margin-left: 250px;
+    padding: 10px 30px;
+    background-color: #f0f0f1a6;
+}
+
+.dash_breadcrumb h1 {
+    margin: 0;
+}
+
+
+/*
 LOGIN
 */
 
@@ -17,4 +36,30 @@ LOGIN
 
 .login-header .brand img {
     width: 125px;
+}
+
+
+/*
+MEDIAS QUERIES
+*/
+
+@media (max-width: 767px) {
+    .dash_breadcrumb {
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 568px) {
+    .dash_breadcrumb {
+        text-align: center;
+    }
+    .dash_breadcrumb_header {
+        width: 100%;
+    }
+    .dash_breadcrumb .breadcrumb {
+        width: 100%;
+        justify-content: center;
+    }
 }

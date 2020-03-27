@@ -20,18 +20,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta content="<?php echo AUTHOR; ?>" name="author" />
     <link rel="base" href="<?php echo base_url('admin/') ?>" />
 
+    <?php /* var_dump(assets_css('admin', [
+        'style.min.css',
+        'style-responsive.min.css',
+        'default.css',
+        'styles.css',
+    ]));
+    die; */ ?>
+
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/font-awesome/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/animate/animate.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/toastr/toastr.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/admin/css/style.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/admin/css/style-responsive.min.css'); ?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/admin/css/default.css'); ?>" rel="stylesheet" id="theme" />
-    <link href="<?php echo base_url('assets/admin/css/styles.css'); ?>" rel="stylesheet" />
+    <?php
+    echo assets_css('plugins/jquery-ui', 'jquery-ui.min.css');
+    echo assets_css('plugins/bootstrap/css', 'bootstrap.min.css');
+    echo assets_css('plugins/font-awesome/css', 'fontawesome-all.min.css');
+    echo assets_css('plugins/animate', 'animate.min.css');
+    echo assets_css('plugins/toastr', 'toastr.min.css');
+    echo assets_css('plugins/sweetalert', 'sweetalert.css');
+    echo assets_css('admin/css', [
+        'style.min.css',
+        'style-responsive.min.css',
+        'default.css',
+        'styles.css',
+    ]);     
+    ?>
     <!-- ================== END BASE CSS STYLE ================== -->
 
     <!--[if lt IE 9]>

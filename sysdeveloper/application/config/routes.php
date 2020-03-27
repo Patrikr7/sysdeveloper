@@ -52,12 +52,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ADMIN
 $route['admin'] = 'admin';
-$route['admin/login'] = 'user';
+$route['admin/login'] = 'user/login';
 $route['admin/lockscreen'] = 'user/lockscreen';
 $route['admin/reset'] = 'user/reset';
 $route['admin/login/access']['post'] = 'user/access';
 $route['admin/unlock']['post'] = 'user/unlock';
 $route['admin/logout']['post'] = 'user/logout';
+
+// ADMIN/USER
+$route['admin/users'] = 'user';
+$route['admin/users/create'] = 'user/page_create';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';

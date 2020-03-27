@@ -15,7 +15,8 @@ class Admin extends CI_Controller
 		$dados = [
 			'title'   => 'Painel',
 			'title_page' => 'Painel Administrativo',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id'])
+			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+			'menuActive' => ["menuPage" => "dash"]
 		];
 		$this->template->load('admin/template/template', 'admin/home', $dados);
 	}

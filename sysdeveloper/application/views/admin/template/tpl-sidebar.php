@@ -7,7 +7,7 @@
                 <a href="<?php echo base_url('admin'); ?>" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
-                        <img src="<?php echo base_url('assets/uploads/users/'.$this->session->userOnline['user_img']) ?>" alt="" title="" />
+                        <img src="<?php echo base_url('assets/uploads/users/' . $this->session->userOnline['user_img']) ?>" alt="" title="" />
                     </div>
                     <div class="info">
                         <?php echo $this->session->userOnline['user_name']; ?>
@@ -19,7 +19,7 @@
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav p-t-10">
-            <li class="has-sub">
+            <li class="has-sub <?php echo (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "dash") ? "active" : "") ?>">
                 <a href="<?php echo base_url('admin'); ?>" title="Painel Inicial">
                     <i class="fa fa-th-large"></i>
                     <span>Dashboard</span>
@@ -78,15 +78,19 @@
                 </ul>
             </li>
 
-            <li class="has-sub">
+            <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "UserActive") ? "active" : "") ?>">
                 <a href="javascript:;">
                     <b class="caret"></b>
-                    <i class="fas fa-book"></i>
-                    <span>Menu</span>
+                    <i class="fa fa-user"></i>
+                    <span>Usuários</span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="">
-                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
+                    <li class="<?= (!empty($menuActive["subPage"]) && ($menuActive["subPage"] == "UserHome") ? "active" : "") ?>">
+                        <a href="<?php echo base_url('admin/users'); ?>" title="Ver Usuários">Ver Usuários</a>
+                    </li>
+
+                    <li class="<?= (!empty($menuActive["subPage"]) && ($menuActive["subPage"] == "UserCreate") ? "active" : "") ?>">
+                        <a href="<?php echo base_url('admin/users/create'); ?>" title="Novo Usuário">Novo Usuário</a>
                     </li>
                 </ul>
             </li>

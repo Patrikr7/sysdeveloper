@@ -13,6 +13,43 @@ class User extends CI_Controller
 
     public function index()
     {
+        $this->user->isLogged();
+
+        var_dump($this->user->getUsers(false, $this->session->userOnline['user_title_level'], $this->session->userOnline['user_id'])); die;
+          
+        $dados = [
+			'title'   => 'Usuários',
+			'title_page' => 'Usuários',
+            'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+            'users' => $this->user->getUsers(false, $this->session->userOnline['user_title_level'], $this->session->userOnline['user_id']),
+			'menuActive' => [
+                "menuPage" => "UserActive",
+                "subPage" => "UserHome"
+            ]
+        ];
+        
+
+		$this->template->load('admin/template/template', 'admin/view/user/view-home', $dados);
+    }
+
+    public function page_create()
+    {
+        $this->user->isLogged();
+          
+        $dados = [
+			'title'   => 'Cadastrar Usuário',
+			'title_page' => 'Cadastrar Usuário',
+			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+			'menuActive' => [
+                "menuPage" => "UserActive",
+                "subPage" => "UserCreate"
+            ]
+		];
+		$this->template->load('admin/template/template', 'admin/view/user/view-create', $dados);
+    }
+
+    public function login()
+    {
         //session_destroy();
         if (!empty($this->session->userOnline)) :
             redirect('admin', 'refresh');
