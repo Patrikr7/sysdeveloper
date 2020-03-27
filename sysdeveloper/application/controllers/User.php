@@ -14,8 +14,6 @@ class User extends CI_Controller
     public function index()
     {
         $this->user->isLogged();
-
-        var_dump($this->user->getUsers(false, $this->session->userOnline['user_title_level'], $this->session->userOnline['user_id'])); die;
           
         $dados = [
 			'title'   => 'Usuários',
@@ -39,7 +37,9 @@ class User extends CI_Controller
         $dados = [
 			'title'   => 'Cadastrar Usuário',
 			'title_page' => 'Cadastrar Usuário',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+            'user' => $this->user->getUserId($this->session->userOnline['user_id']),            
+            'level' => $this->user->getLevelUser($this->session->userOnline["user_title_level"]),
+            'status' => getStatus(),
 			'menuActive' => [
                 "menuPage" => "UserActive",
                 "subPage" => "UserCreate"

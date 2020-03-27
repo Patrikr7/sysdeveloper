@@ -50,9 +50,9 @@
                                 <select class="form-control" id="user_status" name="user_status">
                                     <option value="0">- Selecione o Status -</option>
                                     <?php
-                                    /*foreach ($status as $St):
+                                    foreach ($status as $St):
                                         echo "<option value=\"{$St['st_id']}\">{$St['st_title']}</option>";
-                                    endforeach;*/
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -61,9 +61,9 @@
                                 <select class="form-control" id="user_level" name="user_level">
                                     <option value="0">- Selecione o Nível de Acesso -</option>
                                     <?php
-                                    /*foreach ($level as $l):
+                                    foreach ($level as $l):
                                         echo "<option value=\"{$l['g_id']}\">{$l['g_name']}</option>";
-                                    endforeach;*/
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>

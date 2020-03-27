@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+if (!function_exists('getStatus')) :
+    // SELECIONA TODOS REGISTRO DA TABELA STATUS
+    function getStatus()
+    {
+        $ci = &get_instance();
+        return $ci->db->get('tb_status')->result_array();
+    }
+endif;
+
 if (!function_exists('set_msg')) :
     // SETA MENSAGEM VIA SESSION PARA SER EXIBIDA LIDA POSTERIORMENTE
     function set_msg($msg = null)

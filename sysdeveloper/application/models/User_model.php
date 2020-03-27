@@ -11,8 +11,6 @@ class User_model extends CI_Model
 
     public function getUsers($uri = false, $level, $id)
     {
-        //var_dump($uri, $level, $id);
-        //die;
         if ($uri === false) :
             $query = $this->db->select('u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final')
                 ->from($this->table . ' AS u')
@@ -33,21 +31,6 @@ class User_model extends CI_Model
             $query = $this->db->get_where($this->table, array('user_url' => $uri));
             return $query->row();
         endif;
-
-        /*
-        SELECT u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final 
-        FROM tb_user AS u 
-        INNER JOIN tb_permission_groups AS g ON g.g_id = u.user_level 
-        INNER JOIN tb_status AS s ON s.st_id = u.user_status 
-        INNER JOIN tb_online AS o ON o.on_id_user = u.user_id 
-        WHERE g.g_name = 'Administrador(a)' 
-        OR g.g_name = 'Supervisor(a)' 
-        OR g.g_name = 'Gerente' 
-        OR g.g_name = 'Usuário' 
-        OR g.g_name = 'Editor(a)' 
-        OR (g.g_name = 'Admin Senior' AND u.user_id = 1) 
-        ORDER BY user_name ASC
-        */
     }
 
     //BUSCA USUARIO PELO ID
@@ -137,4 +120,21 @@ class User_model extends CI_Model
             //$this->On_date_end($User["user_id"], $User["on_data_final"]);
         }
     }
+
+    // METODO QUE VERIFICA A SESSÃO DO USUARIO PARA CADASTRAR NOVO USUARIO
+	public function getLevelUser($level){
+        if($level == "Admin Senior"):
+            return $this->db->get('tb_permission_groups')->result_array();
+
+		elseif($level == "Administrador(a)"):
+			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior'");
+
+		elseif($level == "Supervisor(a)"):
+			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior' AND g_name != 'Administrador(a)' AND g_name != 'Supervisor(a)'");
+
+		elseif($level == "Gerente"):
+			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior' AND g_name != 'Administrador(a)' AND g_name != 'Supervisor(a)' AND g_name != 'Gerente'");
+
+		endif;
+	}
 }

@@ -29,7 +29,9 @@
         <?php else: foreach($users as $Users): ?>
             <article class="col-md-3 text-center">
                 <div class="box h-100 text-center">
-                    <a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"] ?>"><img class="user-box-img rounded" src="<?php echo ($Users["user_img"] !== null) ? "/assets/uploads/users/".$Users['user_img'] : HOME."/assets/admin/img/user.png" ?>" alt="<?php echo $Users["user_name"]; ?>" title="<?php echo $Users["user_name"]; ?>"></a>
+                    <a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"] ?>">
+                        <img class="user-box-img rounded" src="<?php echo ($Users["user_img"] !== null) ? base_url('assets/uploads/users/'.$Users['user_img']) : "/assets/admin/img/user.png" ?>" alt="<?php echo $Users["user_name"]; ?>" title="<?php echo $Users["user_name"]; ?>">
+                    </a>
                     <div class="box-content">
                         <header class="box-header">
                             <h1><a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"]; ?>"><?php echo $Users["user_name"]; ?></a></h1>

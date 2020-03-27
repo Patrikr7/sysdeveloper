@@ -40,6 +40,67 @@ LOGIN
 
 
 /*
+USERS/CLIENTS
+*/
+
+.single-users .user-box-img,
+.single-clients .client-box-img {
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.single-clients article {
+    margin-bottom: 20px;
+}
+
+
+/*
+BOX
+*/
+
+.box {
+    background-color: #fff;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.box-content {
+    padding: 15px;
+    background: #fff;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.box-header h1 {
+    font-size: 1.2em;
+}
+
+.box-header a {
+    color: #777;
+    font-size: .8em;
+}
+
+.box-text p {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0;
+}
+
+.box-footer {
+    width: 100%;
+    min-height: auto;
+    padding: 15px;
+    bottom: 0;
+}
+
+
+/*
 MEDIAS QUERIES
 */
 
