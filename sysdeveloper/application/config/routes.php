@@ -62,6 +62,8 @@ $route['admin/logout']['post'] = 'user/logout';
 // ADMIN/USER
 $route['admin/users'] = 'user';
 $route['admin/users/create'] = 'user/page_create';
+$route['admin/users/create']['post'] = 'user/create';
+$route['admin/users/update']['post'] = 'user/update';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
