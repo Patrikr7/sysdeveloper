@@ -117,24 +117,48 @@ class User_model extends CI_Model
             redirect('admin/login', 'refresh');
             die;
         } else {
-            //$this->On_date_end($User["user_id"], $User["on_data_final"]);
+            $this->On_date_end($User->user_id, $User->on_data_final);
         }
     }
 
+    private function On_date_end($id, $date)
+    {
+        if ($date < date('Y-m-d H:i:s')) :
+            $this->db->set('on_data_final', date('Y-m-d H:i:s', strtotime('+60 minute', strtotime(date('H:i:s')))));
+            $this->db->where('on_id_user', $id);
+            $this->db->update('tb_online');
+        endif;
+    }
+
     // METODO QUE VERIFICA A SESSÃO DO USUARIO PARA CADASTRAR NOVO USUARIO
-	public function getLevelUser($level){
-        if($level == "Admin Senior"):
+    public function getLevelUser($level)
+    {
+        if ($level == "Admin Senior") :
             return $this->db->get('tb_permission_groups')->result_array();
 
-		elseif($level == "Administrador(a)"):
-			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior'");
+        elseif ($level == "Administrador(a)") :
+            $this->db->select('*')
+                ->from('tb_permission_groups')
+                ->where('g_name !=', 'Admin Senior');
+            return $this->db->get()->result_array();
 
-		elseif($level == "Supervisor(a)"):
-			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior' AND g_name != 'Administrador(a)' AND g_name != 'Supervisor(a)'");
+        elseif ($level == "Supervisor(a)") :
+            $this->db->select('*')
+                ->from('tb_permission_groups')
+                ->where('g_name !=', 'Admin Senior')
+                ->where('g_name !=', 'Administrador(a)')
+                ->where('g_name !=', 'Supervidor(a)');
+            return $this->db->get()->result_array();
 
-		elseif($level == "Gerente"):
-			//return Users::FullQuery("SELECT * FROM tb_permission_groups WHERE g_name != 'Admin Senior' AND g_name != 'Administrador(a)' AND g_name != 'Supervisor(a)' AND g_name != 'Gerente'");
+        elseif ($level == "Gerente") :
+            $this->db->select('*')
+                ->from('tb_permission_groups')
+                ->where('g_name !=', 'Admin Senior')
+                ->where('g_name !=', 'Administrador(a)')
+                ->where('g_name !=', 'Supervidor(a)')
+                ->where('g_name !=', 'Gerente');
+            return $this->db->get()->result_array();
 
-		endif;
-	}
+        endif;
+    }
 }
