@@ -66,6 +66,18 @@ $route['admin/users/view/(:any)'] = 'user/page_update';
 $route['admin/users/new']['post'] = 'user/create';
 $route['admin/users/update']['post'] = 'user/update';
 
+// PERMISSION/GROUP
+$route['admin/permissions'] = 'permission';
+$route['admin/permissions/group'] = 'permissiongroup/page_create';
+$route['admin/permissions/group/(:any)'] = 'permissiongroup/page_update';
+$route['admin/permissions/permission'] = 'permission/page_create';
+$route['admin/permissions/permission/(:any)'] = 'permission/page_update';
+
+$route['admin/permissions/create']['post'] = 'permission/create';
+$route['admin/permissions/update']['post'] = 'permission/update';
+$route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
+$route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

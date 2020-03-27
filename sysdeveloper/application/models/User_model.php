@@ -12,7 +12,7 @@ class User_model extends CI_Model
     public function getUsers($uri = false, $level, $id)
     {
         if ($uri === false) :
-            $query = $this->db->select('u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final')
+            $this->db->select('u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final')
                 ->from($this->table . ' AS u')
                 ->join('tb_permission_groups AS g', 'u.user_level = g.g_id', 'inner')
                 ->join('tb_online AS o', 'u.user_id = o.on_id_user', 'inner')

@@ -101,6 +101,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?php echo base_url('assets/admin/js/apps.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/boot.js'); ?>"></script>
     <script src="<?php echo base_url('assets/admin/js/function.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/admin/js/send.js'); ?>"></script>
     <!-- ================== END BASE JS ================== -->
 
     <script>

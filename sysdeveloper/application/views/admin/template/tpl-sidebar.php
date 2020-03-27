@@ -95,6 +95,13 @@
                 </ul>
             </li>
 
+            <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "PermissionsActive") ? "active" : "") ?>">
+                <a href="<?php echo base_url('admin/permissions'); ?>" title="Permissões">
+                    <i class="fas fa-key"></i>
+                    <span>Permissão</span>
+                </a>
+            </li>
+
             <li class="has-sub">
                 <a href="<?php echo base_url(); ?>" target="_blank" title="Ver Site">
                     <i class="fa fa-star"></i>
