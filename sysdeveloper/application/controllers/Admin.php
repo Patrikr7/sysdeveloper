@@ -7,7 +7,8 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->user->isLogged();
+        $this->user->isLogged();
+        $this->user->setLoggedUser();
 	}
 	
 	public function index()

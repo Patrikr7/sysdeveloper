@@ -8,11 +8,15 @@ class Permissiongroup extends CI_Controller
 	{
 		parent::__construct();
 		$this->user->isLogged();
-		$this->load->model(['permission_model' => 'permission', 'permissiongroups_model' => 'pgroups']);
+		$this->user->setLoggedUser();
+		$this->load->model([
+			'permission_model' => 'permission',
+			'permissiongroups_model' => 'pgroups'
+		]);
 	}
 
 	public function page_create()
-	{ 
+	{
 		$dados = [
 			'title'   => 'Cadastrar Grupo de Permissão',
 			'title_page' => 'Cadastrar Grupo de Permissão',
@@ -24,8 +28,8 @@ class Permissiongroup extends CI_Controller
 	}
 
 	public function page_update()
-	{ 
-		if($this->pgroups->getGroupUrl($this->uri->segment(4))):
+	{
+		if ($this->pgroups->getGroupUrl($this->uri->segment(4))) :
 			$dados = [
 				'title'   => 'Atualizar Grupo de Permissão',
 				'title_page' => 'Atualizar Grupo de Permissão',
@@ -35,12 +39,10 @@ class Permissiongroup extends CI_Controller
 				'menuActive' => ["menuPage" => "PermissionsActive"]
 			];
 			$this->template->load('admin/template/template', 'admin/view/permission/view-group-update', $dados);
-		else:
+		else :
 
 		endif;
 	}
-
-	
 
 	public function create()
 	{
@@ -58,7 +60,7 @@ class Permissiongroup extends CI_Controller
 		elseif ($this->form_validation->set_rules('g_check[]', 'Permissões', 'trim|required')->run() === false) :
 			$json["error"] = validation_errors();
 
-		elseif($this->pgroups->getGroupName($dados['g_name'])):
+		elseif ($this->pgroups->getGroupName($dados['g_name'])) :
 			$json["error"] = 'Este Grupo já existe!';
 
 		else :
@@ -97,7 +99,7 @@ class Permissiongroup extends CI_Controller
 		elseif ($this->form_validation->set_rules('g_check[]', 'Permissões', 'trim|required')->run() === false) :
 			$json["error"] = validation_errors();
 
-		elseif($name && ($name->g_id != $dados['g_id'])):
+		elseif ($name && ($name->g_id != $dados['g_id'])) :
 			$json["error"] = 'Este Grupo já existe!';
 
 		else :

@@ -3,10 +3,13 @@
 class Permissiongroups_model extends CI_Model
 {
     protected $table = 'tb_permission_groups';
+    private $group;
+    private $permission_array;
 
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('permission_model', 'permission');
     }
 
     public function getGroup()
@@ -49,9 +52,40 @@ class Permissiongroups_model extends CI_Model
         unset($data['g_id']);
         $this->db->update($this->table, $data);
 
-        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0):
+        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0) :
             return true;
-        else:
+        else :
+            return false;
+        endif;
+    }
+
+    public function setGroup($g_id)
+    {
+        $this->permission_array = [];
+
+        if ($this->getGroupId($g_id)) :
+            $row = $this->getGroupId($g_id);
+
+            if (empty($row->g_params)) :
+                $row->g_params = '0';
+            endif;
+
+            $params = $row->g_params;
+            $where_in = $this->permission->permission_where_in($params);
+
+            if ($where_in) :
+                foreach ($where_in as $item) :
+                    $this->permission_array[] = $item['p_name'];
+                endforeach;
+            endif;
+        endif;
+    }
+
+    public function hasPermission($name)
+    {
+        if (in_array($name, $this->permission_array)) :
+            return true;
+        else :
             return false;
         endif;
     }

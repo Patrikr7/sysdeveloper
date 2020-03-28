@@ -3,10 +3,12 @@
 class User_model extends CI_Model
 {
     protected $table = 'tb_user';
+	private $userInfo;
 
     public function __construct()
     {
         parent::__construct();
+		$this->load->model(['permission_model' => 'permission', 'permissiongroups_model' => 'pgroups']);
     }
 
     public function getUsers($uri = false, $level, $id)
@@ -116,10 +118,28 @@ class User_model extends CI_Model
             session_destroy();
             redirect('admin/login', 'refresh');
             die;
+
         } else {
             $this->On_date_end($User->user_id, $User->on_data_final);
         }
     }
+
+    public function setLoggedUser()
+	{
+		if (isset($this->session->userOnline['user_id']) && !empty($this->session->userOnline['user_id'])) :
+            $id = $this->session->userOnline['user_id'];
+
+			if ($this->getUserId($id)) :
+				$this->userInfo = $this->getUserId($id);
+				$this->pgroups->setGroup($this->userInfo->user_level);
+            endif;
+		endif;
+	}
+
+	public function hasPermission($name)
+	{
+		return $this->pgroups->hasPermission($name);
+	}
 
     private function On_date_end($id, $date)
     {

@@ -32,6 +32,12 @@ class Permission_model extends CI_Model
         return $this->db->get_where($this->table, array('p_name' => $name))->row();
     }
 
+    public function permission_where_in($params)
+    {
+        $this->db->select('p_name')->from($this->table)->where("p_id IN($params)");
+        return $this->db->get()->result_array();
+    }
+
     public function create($data)
     {
         $this->db->insert($this->table, $data);
@@ -49,9 +55,9 @@ class Permission_model extends CI_Model
         unset($data['p_id']);
         $this->db->update($this->table, $data);
 
-        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0):
+        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0) :
             return true;
-        else:
+        else :
             return false;
         endif;
     }

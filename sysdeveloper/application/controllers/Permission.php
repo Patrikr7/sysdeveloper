@@ -8,7 +8,11 @@ class Permission extends CI_Controller
 	{
 		parent::__construct();
 		$this->user->isLogged();
-		$this->load->model(['permission_model' => 'permission', 'permissiongroups_model' => 'pgroups']);
+		$this->user->setLoggedUser();
+		$this->load->model([
+			'permission_model' => 'permission',
+			'permissiongroups_model' => 'pgroups'
+		]);
 	}
 
 	public function index()
@@ -25,7 +29,7 @@ class Permission extends CI_Controller
 	}
 
 	public function page_create()
-	{ 
+	{
 		$dados = [
 			'title'   => 'Cadastrar Permissão',
 			'title_page' => 'Cadastrar Permissão',
@@ -36,7 +40,7 @@ class Permission extends CI_Controller
 	}
 
 	public function page_update()
-	{ 
+	{
 		$dados = [
 			'title'   => 'Atualizar Permissão',
 			'title_page' => 'Atualizar Permissão',
@@ -55,7 +59,7 @@ class Permission extends CI_Controller
 		if ($this->form_validation->set_rules('p_name', 'Nome da Permissão', 'trim|required|min_length[3]')->run() === false) :
 			$json["error"] = validation_errors();
 
-		elseif($this->permission->getPermissionName($dados['p_name'])):
+		elseif ($this->permission->getPermissionName($dados['p_name'])) :
 			$json["error"] = 'Está permissão já existe';
 
 		else :
@@ -85,7 +89,7 @@ class Permission extends CI_Controller
 		if ($this->form_validation->set_rules('p_name', 'Nome da Permissão', 'trim|required|min_length[3]')->run() === false) :
 			$json["error"] = validation_errors();
 
-		elseif($name && ($name->p_id != $dados['p_id'])):
+		elseif ($name && ($name->p_id != $dados['p_id'])) :
 			$json["error"] = 'Está permissão já existe';
 
 		else :

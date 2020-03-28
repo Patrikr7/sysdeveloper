@@ -9,6 +9,7 @@ class User extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->user->setLoggedUser();
     }
 
     public function index()
