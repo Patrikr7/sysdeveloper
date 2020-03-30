@@ -14,7 +14,7 @@
 </div>
 
 <div class="content dash_form">
-    <form class="form_horizontal" id="form" method="post" action="" enctype="multipart/form-data">
+    <?php echo form_open_multipart('admin/users/create', 'class="form-horizontal" id="form"'); ?>
         <div class="row">
             <div class="col-12 col-sm-12 col-md-8">
                 <div class="panel panel-primary">

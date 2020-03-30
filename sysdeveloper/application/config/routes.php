@@ -61,12 +61,13 @@ $route['admin/logout']['post'] = 'user/logout';
 
 // ADMIN/USER
 $route['admin/users'] = 'user';
-$route['admin/users/create'] = 'user/page_create';
+$route['admin/users/new'] = 'user/page_create';
 $route['admin/users/view/(:any)'] = 'user/page_update';
-$route['admin/users/new']['post'] = 'user/create';
+$route['admin/users/create']['post'] = 'user/create';
 $route['admin/users/update']['post'] = 'user/update';
 
 // PERMISSION/GROUP
+$route['admin/nopermission'] = 'permission/nopermission';
 $route['admin/permissions'] = 'permission';
 $route['admin/permissions/group'] = 'permissiongroup/page_create';
 $route['admin/permissions/group/(:any)'] = 'permissiongroup/page_update';
@@ -79,5 +80,5 @@ $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
 $route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
 
 $route['default_controller'] = 'welcome';
-$route['404_override'] = '';
+$route['404_override'] = 'error404';
 $route['translate_uri_dashes'] = FALSE;

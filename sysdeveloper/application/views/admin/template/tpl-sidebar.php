@@ -90,7 +90,7 @@
                     </li>
 
                     <li class="<?= (!empty($menuActive["subPage"]) && ($menuActive["subPage"] == "UserCreate") ? "active" : "") ?>">
-                        <a href="<?php echo base_url('admin/users/create'); ?>" title="Novo Usuário">Novo Usuário</a>
+                        <a href="<?php echo base_url('admin/users/new'); ?>" title="Novo Usuário">Novo Usuário</a>
                     </li>
                 </ul>
             </li>

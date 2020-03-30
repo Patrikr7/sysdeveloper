@@ -17,38 +17,69 @@ class Permission extends CI_Controller
 
 	public function index()
 	{
+		if ($this->user->hasPermission('view_permission')) :
+			$dados = [
+				'title'   => 'Permissão',
+				'title_page' => 'Permissão',
+				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+				'g_permission' => $this->pgroups->getGroup(),
+				'permission' => $this->permission->getPermission(),
+				'menuActive' => ["menuPage" => "PermissionsActive"]
+			];
+			$this->template->load('admin/template/template', 'admin/view/permission/view-permissions', $dados);
+
+		else :
+			redirect('admin/nopermission', 'refresh');
+			die;
+
+		endif;
+	}
+
+	public function nopermission()
+	{
 		$dados = [
-			'title'   => 'Permissão',
-			'title_page' => 'Permissão',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-			'g_permission' => $this->pgroups->getGroup(),
-			'permission' => $this->permission->getPermission(),
-			'menuActive' => ["menuPage" => "PermissionsActive"]
+			'title'   => 'Acesso negado',
+			'title_page' => 'Acesso negado!',
+			'user' => $this->user->getUserId($this->session->userOnline['user_id'])
 		];
-		$this->template->load('admin/template/template', 'admin/view/permission/view-permissions', $dados);
+		$this->template->load('admin/template/template', 'admin/noPermission', $dados);
 	}
 
 	public function page_create()
 	{
-		$dados = [
-			'title'   => 'Cadastrar Permissão',
-			'title_page' => 'Cadastrar Permissão',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-			'menuActive' => ["menuPage" => "PermissionsActive"]
-		];
-		$this->template->load('admin/template/template', 'admin/view/permission/view-permission', $dados);
+		if ($this->user->hasPermission('create_permission')) :
+			$dados = [
+				'title'   => 'Cadastrar Permissão',
+				'title_page' => 'Cadastrar Permissão',
+				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+				'menuActive' => ["menuPage" => "PermissionsActive"]
+			];
+			$this->template->load('admin/template/template', 'admin/view/permission/view-permission', $dados);
+
+		else :
+			redirect('admin/nopermission', 'refresh');
+			die;
+
+		endif;
 	}
 
 	public function page_update()
 	{
-		$dados = [
-			'title'   => 'Atualizar Permissão',
-			'title_page' => 'Atualizar Permissão',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-			'permission' => $this->permission->getPermissionUrl($this->uri->segment(4)),
-			'menuActive' => ["menuPage" => "PermissionsActive"]
-		];
-		$this->template->load('admin/template/template', 'admin/view/permission/view-permission-update', $dados);
+		if ($this->user->hasPermission('update_permission')) :
+			$dados = [
+				'title'   => 'Atualizar Permissão',
+				'title_page' => 'Atualizar Permissão',
+				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+				'permission' => $this->permission->getPermissionUrl($this->uri->segment(4)),
+				'menuActive' => ["menuPage" => "PermissionsActive"]
+			];
+			$this->template->load('admin/template/template', 'admin/view/permission/view-permission-update', $dados);
+
+		else :
+			redirect('admin/nopermission', 'refresh');
+			die;
+
+		endif;		
 	}
 
 	public function create()

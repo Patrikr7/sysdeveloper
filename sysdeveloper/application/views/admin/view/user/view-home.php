@@ -12,7 +12,7 @@
     <!-- end breadcrumb -->
     <!-- btn -->
     <div class="dash_breadcrumb_btn">
-    	<a href="<?php echo base_url('admin/users/create'); ?>" class="btn btn-success btn-xs" title="Novo Usuário">Novo Usuário</a>
+    	<a href="<?php echo base_url('admin/users/new'); ?>" class="btn btn-success btn-xs" title="Novo Usuário">Novo Usuário</a>
     </div>
     <!-- end btn -->
 </div>
