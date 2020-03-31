@@ -217,3 +217,18 @@ if (!function_exists('getCodeNumber')) :
         return time() . $hash;
     }
 endif;
+
+// PASSWORD
+if (!function_exists('PasswordRegex')) :
+    function PasswordRegex($pass)
+    {
+        if (isset($pass)) :
+            $pattern = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=.*[^a-zA-Z\d])\S*$/";
+            if (preg_match($pattern, $pass)) :
+                return true;
+            else :
+                return false;
+            endif;
+        endif;
+    }
+endif;

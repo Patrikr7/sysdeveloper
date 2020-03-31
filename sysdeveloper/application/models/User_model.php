@@ -3,17 +3,17 @@
 class User_model extends CI_Model
 {
     protected $table = 'tb_user';
-	private $userInfo;
+    private $userInfo;
 
     public function __construct()
     {
         parent::__construct();
-		$this->load->model(['permission_model' => 'permission', 'permissiongroups_model' => 'pgroups']);
+        $this->load->model(['permission_model' => 'permission', 'permissiongroups_model' => 'pgroups']);
     }
 
-    public function getUsers($uri = false, $level, $id)
+    public function getUsers($level, $id)
     {
-        if ($uri === false) :
+        if ($level === 'Admin Senior') :
             $this->db->select('u.user_id, u.user_name, u.user_img, u.user_email, u.user_status, u.user_level, u.user_url, g.*, s.*, o.on_id_user, o.on_online, o.on_data_final')
                 ->from($this->table . ' AS u')
                 ->join('tb_permission_groups AS g', 'u.user_level = g.g_id', 'inner')
@@ -25,14 +25,27 @@ class User_model extends CI_Model
                 ->or_where('g.g_name', 'Gerente')
                 ->or_where('g.g_name', 'Usuário')
                 ->or_where('g.g_name', 'Editor(a)')
-                ->or_where('g.g_name', 'Editor(a)')
                 ->order_by('u.user_name', 'ASC');
             return $this->db->get()->result_array();
 
         else :
-            $query = $this->db->get_where($this->table, array('user_url' => $uri));
-            return $query->row();
+
         endif;
+        //$query = $this->db->get_where($this->table, array('user_url' => $uri));
+        //return $query->row();
+    }
+
+    //BUSCA USER PELO NOME
+    public function getUserName($name)
+    {
+        return $this->db->get_where($this->table, array('user_name' => $name));
+    }
+
+    //BUSCA USER PELA URI
+    public function getUserUri($uri)
+    {
+        $query = $this->db->get_where($this->table, array('user_url' => $uri));
+        return $query->row();
     }
 
     //BUSCA USUARIO PELO ID
@@ -57,6 +70,35 @@ class User_model extends CI_Model
             ->join('tb_online AS o', 'u.user_id = o.on_id_user', 'inner')
             ->join('tb_status AS s', 'u.user_status = s.st_id', 'inner');
         return $this->db->get()->row();
+    }
+
+    public function create($data)
+    {
+        $this->db->insert($this->table, $data);
+
+        if ($this->db->insert_id()) :
+            $dados = [
+                'on_id'         => NULL,
+                'on_id_user'    => $this->db->insert_id(),
+                'on_agent'      => NULL,
+                'on_data_final' => date('Y-m-d H:i:s'),
+                'on_ip'         => NULL,
+                'on_online'     => NULL,
+                'on_session'    => NULL
+            ];
+
+            $this->insertOnline($dados);
+            return true;
+
+        else :
+            return false;
+        endif;
+    }
+
+    // INSERE USUARIO CADASTRADO NA tb_online
+    public function insertOnline($data)
+    {
+        $this->db->insert('tb_online', $data);
     }
 
     // ATUALIZA TABELA ONLINE
@@ -118,28 +160,27 @@ class User_model extends CI_Model
             session_destroy();
             redirect('admin/login', 'refresh');
             die;
-
         } else {
             $this->On_date_end($User->user_id, $User->on_data_final);
         }
     }
 
     public function setLoggedUser()
-	{
-		if (isset($this->session->userOnline['user_id']) && !empty($this->session->userOnline['user_id'])) :
+    {
+        if (isset($this->session->userOnline['user_id']) && !empty($this->session->userOnline['user_id'])) :
             $id = $this->session->userOnline['user_id'];
 
-			if ($this->getUserId($id)) :
-				$this->userInfo = $this->getUserId($id);
-				$this->pgroups->setGroup($this->userInfo->user_level);
+            if ($this->getUserId($id)) :
+                $this->userInfo = $this->getUserId($id);
+                $this->pgroups->setGroup($this->userInfo->user_level);
             endif;
-		endif;
-	}
+        endif;
+    }
 
-	public function hasPermission($name)
-	{
-		return $this->pgroups->hasPermission($name);
-	}
+    public function hasPermission($name)
+    {
+        return $this->pgroups->hasPermission($name);
+    }
 
     private function On_date_end($id, $date)
     {

@@ -48,7 +48,7 @@
                             <div class="col-md-6 form-group">
                                 <label class="control-label">Status *</label>
                                 <select class="form-control" id="user_status" name="user_status">
-                                    <option value="0">- Selecione o Status -</option>
+                                    <option value="">- Selecione o Status -</option>
                                     <?php
                                     foreach ($status as $St):
                                         echo "<option value=\"{$St['st_id']}\">{$St['st_title']}</option>";
@@ -59,7 +59,7 @@
                             <div class="col-md-6 form-group">
                                 <label class="control-label">Nível de Acesso *</label>
                                 <select class="form-control" id="user_level" name="user_level">
-                                    <option value="0">- Selecione o Nível de Acesso -</option>
+                                    <option value="">- Selecione o Nível de Acesso -</option>
                                     <?php
                                     foreach ($level as $l):
                                         echo "<option value=\"{$l['g_id']}\">{$l['g_name']}</option>";
