@@ -27,7 +27,7 @@
                 </div>
             </div>
         <?php else: foreach($users as $Users): ?>
-            <article class="col-md-3 text-center">
+            <article class="col-md-3 text-center mb-4">
                 <div class="box h-100 text-center">
                     <a href="<?php echo base_url('admin/users/view/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"] ?>">
                         <img class="user-box-img rounded" src="<?php echo ($Users["user_img"] ? base_url('assets/uploads/users/'.$Users['user_img']) : base_url('assets/admin/img/user.png')); ?>" alt="<?php echo $Users["user_name"]; ?>" title="<?php echo $Users["user_name"]; ?>">

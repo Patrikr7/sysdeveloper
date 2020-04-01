@@ -66,13 +66,12 @@ class User extends CI_Controller
     public function page_update()
     {
         $this->user->isLogged();
-        //var_dump($this->uri->segments[4]); die;
 
         if (!$this->user->hasPermission('update_user')) :
             redirect('admin/nopermission', 'refresh');
             die;
 
-        elseif($this->user->getUserUri($this->uri->segments[4])):
+        elseif ($this->user->getUserUri($this->uri->segments[4])) :
             $dados = [
                 'title'   => 'Atualizar Usuário',
                 'title_page' => 'Atualizar Usuário',
@@ -88,11 +87,11 @@ class User extends CI_Controller
 
         else :
             $dados = [
-				'title'   => 'Erro 404',
-				'title_page' => 'Erro 404 - Página NÃO encontrada',
-				'user' => $this->user->getUserId($this->session->userOnline['user_id'])
-			];
-			$this->template->load('admin/template/template', 'admin/404', $dados);
+                'title'   => 'Erro 404',
+                'title_page' => 'Erro 404 - Página NÃO encontrada',
+                'user' => $this->user->getUserId($this->session->userOnline['user_id'])
+            ];
+            $this->template->load('admin/template/template', 'admin/404', $dados);
 
         endif;
     }
@@ -135,13 +134,13 @@ class User extends CI_Controller
             $json['focus'] = 'user_level';
 
         elseif (empty($_FILES["user_img"]["name"])) :
-            $url = slug($this->input->post('user_name'));
-            if ($this->user->getUserName($this->input->post('user_name'))->num_rows() >= 1):
-                $url .= '-' . $this->user->getUserName($this->input->post('user_name'))->num_rows();
+            $url = slug($dados['user_name']);
+            if ($this->user->getUserName($dados['user_name'])->num_rows() >= 1) :
+                $url .= '-' . $this->user->getUserName($dados['user_name'])->num_rows();
             endif;
 
-            $dados_form['user_img'] = NULL;
-            $dados_form['user_url'] = $url;
+            $dados['user_img'] = NULL;
+            $dados['user_url'] = $url;
             $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
             $dados["user_cpass"] = $dados['user_pass'];
             $dados["user_cod"] = getCode(45);
@@ -157,40 +156,59 @@ class User extends CI_Controller
             endif;
 
         else :
-        /*$url = slug($this->input->post('user_name'));
-            if ($this->client_model->getClientName($this->input->post('user_name'))->num_rows() >= 1):
-                $url .= '-' . $this->client_model->getClientName($this->input->post('user_name'))->num_rows();
+            $url = slug($dados['user_name']);
+            if ($this->user->getUserName($dados['user_name'])->num_rows() >= 1) :
+                $url .= '-' . $this->user->getUserName($dados['user_name'])->num_rows();
             endif;
 
-            if (file_exists(FCPATH . '/assets/uploads/client/' . $_FILES['user_img']['name'])):
+            if (!is_dir(FCPATH . 'assets/uploads/users')) :
+                mkdir(FCPATH . 'assets/uploads/users');
+            endif;
+
+            if (file_exists(FCPATH . 'assets/uploads/users/' . $_FILES['user_img']['name'])) :
                 $json['error'] = 'A imagem <strong>' . $_FILES['user_img']['name'] . '</strong> já existe!';
 
-            elseif ($this->upload->do_upload('user_img')):
+            elseif ($this->upload->do_upload('user_img')) :
                 $dados_upload = $this->upload->data();
 
-                $dados_form = $this->input->post();
-                $dados_form['user_img'] = $url . $dados_upload['file_ext'];
-                $dados_form['user_nasc'] = date('Y-m-d', strtotime(implode('-', explode('/', $dados['user_nasc']))));
-                $dados_form['user_url'] = $url;
+                // FAZ O CROP DA IMAGEM
+                $imageSize = $this->image_lib->get_image_properties(FCPATH . '/assets/uploads/users/' . $dados_upload['file_name'], TRUE);
+                $this->image_lib->initialize(config_crop(FCPATH . 'assets/uploads/users/', $dados_upload['file_name'], 500, 500, $imageSize));
 
-                if ($this->client_model->create($dados_form)):
-                    // RENOMEIA A IMAGEM DENTRO DA PASTA
-                    rename($dados_upload['full_path'], $dados_upload['file_path'] . $url . $dados_upload['file_ext']);
+                if (!$this->image_lib->crop()) :
+                    // DELETA A IMAGEM
+                    unlink('./assets/uploads/users/' . $dados_upload['file_name']);
+                    $json['error'] = $this->image_lib->display_errors();
 
-                    $json['success'] = 'Cadastro realizado com sucesso!';
-                    $json['redirect'] = '../users';
+                else :
+                    $this->image_lib->clear();
 
-                else:
-                    // DELETA A IMAGEM EM CASO DE ERRO
-                    unlink($dados_upload['full_path']);
-                    $json['error'] = 'Erro ao efetuar o cadastro, entre em contato com o suporte!';
+                    $dados['user_img'] = $url . $dados_upload['file_ext'];
+                    $dados['user_url'] = $url;
+                    $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
+                    $dados["user_cpass"] = $dados['user_pass'];
+                    $dados["user_cod"] = getCode(45);
+
+                    if ($this->user->create($dados)) :
+                        // RENOMEIA A IMAGEM DENTRO DA PASTA
+                        rename($dados_upload['full_path'], $dados_upload['file_path'] . $url . $dados_upload['file_ext']);
+
+                        $json['success'] = 'Cadastro realizado com sucesso!';
+                        $json['redirect'] = '../users';
+
+                    else :
+                        // DELETA A IMAGEM EM CASO DE ERRO
+                        unlink($dados_upload['full_path']);
+                        $json['error'] = 'Erro ao efetuar o cadastro, entre em contato com o suporte!';
+
+                    endif;
 
                 endif;
 
-            else:
+            else :
                 $json['error'] = $this->upload->display_errors();
 
-            endif;*/
+            endif;
 
         endif;
 

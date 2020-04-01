@@ -73,7 +73,6 @@ $route['admin/permissions/group'] = 'permissiongroup/page_create';
 $route['admin/permissions/group/(:any)'] = 'permissiongroup/page_update';
 $route['admin/permissions/permission'] = 'permission/page_create';
 $route['admin/permissions/permission/(:any)'] = 'permission/page_update';
-
 $route['admin/permissions/create']['post'] = 'permission/create';
 $route['admin/permissions/update']['post'] = 'permission/update';
 $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
