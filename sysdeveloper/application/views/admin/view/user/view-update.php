@@ -26,6 +26,7 @@
                         <div class="col-md-12 form-group">
                             <label class="control-label">Nome Completo *</label>
                             <input type="text" class="form-control" id="user_name" name="user_name" minlenght="5" value="<?php echo $user_url->user_name; ?>">
+                            <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_url->user_id; ?>">
                         </div>
                         <div class="col-md-12 form-group">
                             <label class="control-label">Email *</label>
@@ -94,8 +95,8 @@
                             <input type="file" class="form-control" id="img" name="user_img">
                         </div>
 
-                        <div class="col-12 form-group">
-                            <button type="submit" class="btn btn-green">Cadastrar <i class="fa fa-spinner fa-spin fa-fw form_load" style="display:none;"></i></button>
+                        <div class="col-12 form-group mb-0">
+                            <button type="submit" class="btn btn-info">Atualizar <i class="fa fa-spinner fa-spin fa-fw form_load" style="display:none;"></i></button>
                         </div>
                     </div>
                 </div>

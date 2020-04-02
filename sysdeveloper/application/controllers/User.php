@@ -99,7 +99,7 @@ class User extends CI_Controller
     public function create()
     {
         $json = [];
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $dados = $this->input->post();
 
         if ($this->form_validation->set_rules('user_name', 'Nome', 'trim|required|min_length[5]|alpha_numeric_spaces')->run() === false) :
             $json['error'] = validation_errors();
@@ -109,7 +109,7 @@ class User extends CI_Controller
             $json['error'] = validation_errors();
             $json['focus'] = 'user_email';
 
-        elseif ($this->form_validation->set_rules('user_login', 'Login', 'trim|required|min_length[3]')->run() === false) :
+        elseif ($this->form_validation->set_rules('user_login', 'Login', 'trim|required|min_length[3]|is_unique[tb_user.user_login]')->run() === false) :
             $json['error'] = validation_errors();
             $json['focus'] = 'user_login';
 
@@ -209,6 +209,180 @@ class User extends CI_Controller
                 $json['error'] = $this->upload->display_errors();
 
             endif;
+
+        endif;
+
+        echo json_encode($json);
+    }
+
+    public function update()
+    {
+        $json = [];
+        $dados = $this->input->post();
+
+        $id = $this->user->getUserId($dados['user_id']);
+        $login = $this->user->getLoginJoin($dados['user_login']);
+        $email = $this->user->getUserEmail($dados['user_email']);
+        $url = $this->user->getUserUrl($dados['user_name'], $dados['user_id']);
+
+        if ($this->form_validation->set_rules('user_name', 'Nome', 'trim|required|min_length[5]|alpha_numeric_spaces')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_name';
+
+        elseif ($this->form_validation->set_rules('user_email', 'Email', 'trim|required|valid_email')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_email';
+
+        elseif ($email && ($dados['user_id'] !== $email['user_id'])) :
+            $json["error"] = 'O email <strong>' . $dados['user_email'] . '</strong> já existe';
+            $json['focus'] = 'user_email';
+
+        elseif ($this->form_validation->set_rules('user_login', 'Login', 'trim|required|min_length[3]')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_login';
+
+        elseif ($login && ($dados['user_id'] !== $login->user_id)) :
+            $json["error"] = 'O login <strong>' . $dados['user_login'] . '</strong> já existe';
+            $json['focus'] = 'user_login';
+
+        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_pass', 'Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_pass';
+
+        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_cpass', 'Confirmar Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_cpass';
+
+        elseif (!empty($dados['user_pass']) && ($dados['user_pass'] != $dados['user_cpass'])) :
+            $json['error'] = 'Senha diferente!';
+            $json['focus'] = 'user_cpass';
+
+        elseif ($this->form_validation->set_rules('user_status', 'Status', 'trim|required')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_status';
+
+        elseif ($this->form_validation->set_rules('user_level', 'Nível de Acesso', 'trim|required')->run() === false) :
+            $json['error'] = validation_errors();
+            $json['focus'] = 'user_level';
+
+        elseif (empty($_FILES["user_img"]["name"])) :
+
+            if (!empty($id->user_img)) :
+                list($txt, $ext) = explode('.', $id->user_img);
+                $img = $url . '.' . $ext;
+            else :
+                $img = null;
+            endif;
+
+            $dados['user_img'] = $img;
+            $dados['user_url'] = $url;
+
+            if (!empty($dados['user_pass'])) :
+                $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
+                $dados["user_cpass"] = $dados['user_pass'];
+            else :
+                unset($dados["user_pass"], $dados["user_cpass"]);
+            endif;
+
+            $dados["user_cod"] = getCode(45);
+
+            if ($this->user->update($dados)) :
+
+                // RENOMEIA A IMAGEM DENTRO DA PASTA
+                if (!empty($id->user_img)) :
+                    rename('./assets/uploads/users/' . $id->user_img, './assets/uploads/users/' . $img);
+                endif;
+
+                $json['success'] = 'Registro atualizado com sucesso!';
+                $json['redirect'] = '../../users';
+
+            else :
+                $json['error'] = 'Erro ao atualizar registro, entre em contato com o suporte!';
+
+            endif;
+
+        else :
+
+            if (file_exists(FCPATH . 'assets/uploads/users/' . $_FILES['user_img']['name'])) :
+                $json['error'] = 'A imagem <strong>' . $_FILES['user_img']['name'] . '</strong> já existe!';
+
+            elseif ($this->upload->do_upload('user_img')) :
+                $dados_upload = $this->upload->data();
+
+                // FAZ O CROP DA IMAGEM
+                $imageSize = $this->image_lib->get_image_properties(FCPATH . '/assets/uploads/users/' . $dados_upload['file_name'], TRUE);
+                $this->image_lib->initialize(config_crop(FCPATH . 'assets/uploads/users/', $dados_upload['file_name'], 500, 500, $imageSize));
+
+                if (!$this->image_lib->crop()) :
+                    // DELETA A IMAGEM
+                    unlink('./assets/uploads/users/' . $dados_upload['file_name']);
+                    $json['error'] = $this->image_lib->display_errors();
+
+                else :
+                    $this->image_lib->clear();
+                    if (file_exists(FCPATH . 'assets/uploads/users/' . $id->user_img)) :
+                        // DELETA A IMAGEM ANTIGA
+                        unlink(FCPATH . 'assets/uploads/users/' . $id->user_img);
+                    endif;
+
+                    $dados['user_img'] = $url . $dados_upload['file_ext'];
+                    $dados['user_url'] = $url;
+
+                    if (!empty($dados['user_pass'])) :
+                        $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
+                        $dados["user_cpass"] = $dados['user_pass'];
+                    else :
+                        unset($dados["user_pass"], $dados["user_cpass"]);
+                    endif;
+
+                    $dados["user_cod"] = getCode(45);
+
+                    if ($this->user->update($dados)) :
+                        // RENOMEIA A IMAGEM DENTRO DA PASTA
+                        rename($dados_upload['full_path'], $dados_upload['file_path'] . $url . $dados_upload['file_ext']);
+
+                        $json['success'] = 'Registro atualizado com sucesso!';
+                        $json['redirect'] = '../../users';
+
+                    else :
+                        // DELETA A IMAGEM EM CASO DE ERRO
+                        unlink($dados_upload['full_path']);
+                        $this->user->updateImg($dados['user_id']);
+                        $json['error'] = 'Erro ao efetuar o cadastro, entre em contato com o suporte!';
+
+                    endif;
+
+                endif;
+
+            else :
+                $json['error'] = $this->upload->display_errors();
+
+            endif;
+
+        endif;
+
+        echo json_encode($json);
+    }
+
+    public function delete()
+    {
+        $json = [];
+        $dados = $this->input->post();
+        $user = $this->user->getUserId($dados['id']);
+
+        if (!$user) :
+            $json['error'] = 'Oppss! você tentou remover um usuário que não existe!';
+            $json['type'] = "warning";
+
+        elseif ($this->user->delete(intval($dados['id']))) :
+            if (!empty($user->user_img)) :
+                unlink(FCPATH . 'assets/uploads/users/' . $user->user_img);
+            endif;
+            $json['success'] = "Usuário deletado com sucesso!";
+
+        else :
+            $json['error'] = "Erro ao deletar a usuário, entre em contato com suporte!";
+            $json['type'] = 'warning';
 
         endif;
 

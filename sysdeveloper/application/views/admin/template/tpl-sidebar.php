@@ -103,6 +103,15 @@
                 </a>
             </li>
             <?php endif; ?>
+            
+            <?php if ($this->user->hasPermission('view_configuration')) : ?>
+            <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "config") ? "active" : "") ?>">
+                <a href="<?php echo base_url('admin/configuration'); ?>" title="Configuração Geral">
+                    <i class="fa fa-cogs"></i>
+                    <span>Configuração</span>
+                </a>
+            </li>
+            <?php endif; ?>
 
             <li class="has-sub">
                 <a href="<?php echo base_url(); ?>" target="_blank" title="Ver Site">

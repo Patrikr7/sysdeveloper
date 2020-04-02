@@ -88,7 +88,7 @@
                                 <input type="file" class="form-control" id="img" name="user_img">
                             </div>
 
-                            <div class="col-12 form-group">
+                            <div class="col-12 form-group mb-0">
                                 <button type="submit" class="btn btn-green">Cadastrar <i class="fa fa-spinner fa-spin fa-fw form_load" style="display:none;"></i></button>
                             </div>
                         </div>

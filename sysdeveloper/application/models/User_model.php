@@ -31,8 +31,6 @@ class User_model extends CI_Model
         else :
 
         endif;
-        //$query = $this->db->get_where($this->table, array('user_url' => $uri));
-        //return $query->row();
     }
 
     //BUSCA USER PELO NOME
@@ -41,11 +39,35 @@ class User_model extends CI_Model
         return $this->db->get_where($this->table, array('user_name' => $name));
     }
 
+    //BUSCA USER PELO EMAIL
+    public function getUserEmail($email)
+    {
+        return $this->db->get_where($this->table, array('user_email' => $email))->row_array();
+    }
+
     //BUSCA USER PELA URI
     public function getUserUri($uri)
     {
         $query = $this->db->get_where($this->table, array('user_url' => $uri));
         return $query->row();
+    }
+
+    //CONFIGURA A URL
+    public function getUserUrl($name, $id)
+    {
+        $url = slug($name);
+        $array = [
+            'user_url' => $url,
+            'user_id !=' => $id,
+        ];
+
+        $query = $this->db->where($array)->get($this->table)->num_rows();
+
+        if ($query > 0):
+            return $url . '-' . $id;
+        else:
+            return $url;
+        endif;
     }
 
     //BUSCA USUARIO PELO ID
@@ -101,12 +123,43 @@ class User_model extends CI_Model
         $this->db->insert('tb_online', $data);
     }
 
+    public function update($data)
+    {
+        $this->db->where('user_id', $data['user_id']);
+        unset($data['user_id']);
+        $this->db->update($this->table, $data);
+
+        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
+    // CASO DE ERRO AO ATUALIZAR REGISTRO, SETA A IMAGEM COMO NULL NO BD
+    public function updateImg($id)
+    {        
+        $this->db->set('user_img', NULL);
+        $this->db->where('user_id', $id);
+        $this->db->update($this->table);
+    }
+
     // ATUALIZA TABELA ONLINE
     public function updateOnline($data)
     {
         $this->db->where('on_id_user', $data['on_id_user']);
         unset($data['on_id_user']);
         $this->db->update('tb_online', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->delete($this->table, array('user_id' => $id));
+        if ($this->db->affected_rows()):
+            return true;
+        else:
+            return false;
+        endif;
     }
 
     // ATUALIZA TABELA ONLINE

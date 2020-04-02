@@ -65,6 +65,7 @@ $route['admin/users/new'] = 'user/page_create';
 $route['admin/users/view/(:any)'] = 'user/page_update';
 $route['admin/users/create']['post'] = 'user/create';
 $route['admin/users/update']['post'] = 'user/update';
+$route['admin/users/delete']['post'] = 'user/delete';
 
 // PERMISSION/GROUP
 $route['admin/nopermission'] = 'permission/nopermission';
@@ -77,6 +78,9 @@ $route['admin/permissions/create']['post'] = 'permission/create';
 $route['admin/permissions/update']['post'] = 'permission/update';
 $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
 $route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
+
+// CONFIGURAÇÃO GERAL
+$route['admin/configuration'] = 'configuration';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = 'error404';
