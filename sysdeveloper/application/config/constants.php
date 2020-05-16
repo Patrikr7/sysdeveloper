@@ -88,3 +88,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('AUTHOR', 'Developer :: Emerson Patrik');
 define('TITLE_NAME', 'Sys Developer');
 define('FAVICON', 'favicon.png');
+define('SITE_IMG', 'assets/img/site.jpg');

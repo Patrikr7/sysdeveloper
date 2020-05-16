@@ -425,6 +425,16 @@ class User extends CI_Controller
         $this->load->view('admin/lockscreen', $dados);
     }
 
+    public function forgot_password()
+    {
+        $dados = [
+            'title'   => 'Recuperar Senha',
+            'title_page' => 'Recuperar Senha',
+        ];
+
+        $this->load->view('admin/forgot-password', $dados);
+    }
+
     public function access()
     {
         $json = [];

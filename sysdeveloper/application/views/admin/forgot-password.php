@@ -15,8 +15,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/' . FAVICON) ?>">
     <link rel="base" href="<?php echo base_url(); ?>" />
-
-    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
@@ -29,52 +29,49 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="<?php echo base_url('assets/admin/css/default.css'); ?>" rel="stylesheet" id="theme" />
     <link href="<?php echo base_url('assets/admin/css/styles.css'); ?>" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
-
 </head>
-
 <body class="pace-top bg-white">
-    <!-- begin #page-loader -->
-    <div id="page-loader" class="fade show"><span class="spinner"></span></div>
-    <!-- end #page-loader -->
-
-    <!-- begin #page-container -->
-    <div id="page-container" class="fade">
-        <!-- begin login -->
-        <div class="login login-with-news-feed">
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+	
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade">
+	    <!-- begin register -->
+        <div class="register register-with-news-feed">
             <!-- begin news-feed -->
             <div class="news-feed">
-                <div class="news-image" style="background-image: url(<?php echo base_url('assets/admin/img/login-bg-7.jpg'); ?>)"></div>
+                <div class="news-image" style="background-image: url(<?php echo base_url('assets/admin/img/login-bg-9.jpg'); ?>)"></div>
                 <div class="news-caption">
                     <h4 class="caption-title"><?php echo TITLE_NAME; ?></h4>
                     <p>
-                        Com a System Web de administração, você usa o painel para gerenciar a conta da sua empresa, como adicionar novos usuários, gerenciar configurações de segurança e ativar os serviços que você deseja que sua equipe acesse.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere velit fermentum ligula dapibus, eu placerat ligula dapibus. Nam et orci ut mi rutrum dapibus sed in dolor. Phasellus tempus luctus nulla sed placerat.
                     </p>
                 </div>
             </div>
             <!-- end news-feed -->
             <!-- begin right-content -->
             <div class="right-content">
-                <!-- begin login-header -->
-                <div class="login-header">
-                    <div class="brand text-center">
-                        <figure>
-                            <img class="img-fluid img-thumbnail" src="<?php echo (empty($this->session->userOnline['user_img']) ? base_url('assets/admin/img/system.png') : base_url('assets/uploads/users/' . $this->session->userOnline['user_img'])); ?>" />
-                        </figure>
-                    </div>
-                </div>
-                <!-- end login-header -->
-                <!-- begin login-content -->
-                <div class="login-content">
-                    <form id="form_login" name="form_login" method="post" action="unlock" enctype="multipart/form-data">
-                        <p><strong><?php echo $this->session->userOnline['user_name']; ?></strong>, você está na tela de bloqueio. O sistema principal foi encerrado e você precisa digitar sua senha para voltar.</p>
-                        <div class="form-group m-b-15">
-                            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="******">
+                <!-- begin register-header -->
+                <h1 class="register-header">
+                    Recuperar Senha
+                    <small>Informe seu e-mail abaixo para recuperar sua senha!</small>
+                </h1>
+                <!-- end register-header -->
+                <!-- begin register-content -->
+                <div class="register-content">
+                    <form id="form_login" class="margin-bottom-0" name="form_login" method="post" action="" enctype="multipart/form-data">
+                        <label class="control-label">Email <span class="text-danger">*</span></label>
+                        <div class="row m-b-15">
+                            <div class="col-md-12">
+                                <input type="email" id="user_email" name="user_email" class="form-control" placeholder="Seu email" required="">
+                            </div>
                         </div>
                         <div class="login-buttons">
-                            <button type="submit" class="btn btn-info btn-block btn-lg" title="Desbloquear">Desbloquear <i class="fa fa-spinner fa-spin fa-fw form_load" style="display:none;"></i></button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" title="Recuperar Senha">Recuperar Senha <i class="fa fa-spinner fa-spin fa-fw form_load" style="display:none;"></i></button>
                         </div>
-                        <div class="m-t-20 m-b-40 p-b-40 text-center">
-                            Esqueceu a senha? Clique <a href="<?php echo base_url('admin/forgot-password'); ?>" class="text-success">aqui</a> para redefinir sua senha.
+                        <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+                            Lembrei! Quero logar! <a href="<?php echo base_url('admin/login'); ?>" class="text-success"><i class="fab fa-angellist"></i> Login</a>.
                         </div>
                         <hr />
                         <p class="text-center text-grey-darker">
@@ -82,15 +79,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </p>
                     </form>
                 </div>
-                <!-- end login-content -->
+                <!-- end register-content -->
             </div>
-            <!-- end right-container -->
+            <!-- end right-content -->
         </div>
-        <!-- end login -->
-    </div>
-    <!-- end page container -->
-
-    <!-- ================== BEGIN BASE JS ================== -->
+        <!-- end register -->
+        
+        
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
     <script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/jquery/jquery-form.js'); ?>"></script>
@@ -114,5 +113,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
         });
     </script>
 </body>
-
 </html>

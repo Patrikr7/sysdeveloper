@@ -54,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['admin'] = 'admin';
 $route['admin/login'] = 'user/login';
 $route['admin/lockscreen'] = 'user/lockscreen';
+$route['admin/forgot-password'] = 'user/forgot_password';
 $route['admin/reset'] = 'user/reset';
 $route['admin/login/access']['post'] = 'user/access';
 $route['admin/unlock']['post'] = 'user/unlock';
@@ -79,9 +80,15 @@ $route['admin/permissions/update']['post'] = 'permission/update';
 $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
 $route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
 
-// CONFIGURAÇÃO GERAL
+// CONFIGURATIONS GERAL
 $route['admin/configuration'] = 'configuration';
 
-$route['default_controller'] = 'welcome';
+// PAGES SITE
+$route['default_controller'] = 'website';
+$route['([a-zA-Z0-9-]+)'] = 'website/page/$1';
+
+// ERRO 404
 $route['404_override'] = 'error404';
+
+
 $route['translate_uri_dashes'] = FALSE;

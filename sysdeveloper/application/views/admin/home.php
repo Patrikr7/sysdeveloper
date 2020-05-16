@@ -24,6 +24,10 @@
 		</div>
 		<div class="panel-body">
 			Panel Content Here
+			<?php 
+			echo "<br><br>"; 
+			echo "UUID4: " . $this->uuid->v4();
+			?>
 		</div>
 	</div>
 	<!-- end panel -->

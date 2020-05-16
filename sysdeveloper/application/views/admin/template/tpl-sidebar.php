@@ -26,58 +26,6 @@
                 </a>
             </li>
 
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret"></b>
-                    <i class="fas fa-book"></i>
-                    <span>Menu</span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="">
-                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret"></b>
-                    <i class="fas fa-book"></i>
-                    <span>Menu</span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="">
-                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret"></b>
-                    <i class="fas fa-book"></i>
-                    <span>Menu</span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="">
-                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret"></b>
-                    <i class="fas fa-book"></i>
-                    <span>Menu</span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="">
-                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "UserActive") ? "active" : "") ?>">
                 <a href="javascript:;">
                     <b class="caret"></b>
@@ -94,23 +42,23 @@
                     </li>
                 </ul>
             </li>
-            
+
             <?php if ($this->user->hasPermission('view_permission')) : ?>
-            <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "PermissionsActive") ? "active" : "") ?>">
-                <a href="<?php echo base_url('admin/permissions'); ?>" title="Permissões">
-                    <i class="fas fa-key"></i>
-                    <span>Permissão</span>
-                </a>
-            </li>
+                <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "PermissionsActive") ? "active" : "") ?>">
+                    <a href="<?php echo base_url('admin/permissions'); ?>" title="Permissões">
+                        <i class="fas fa-key"></i>
+                        <span>Permissão</span>
+                    </a>
+                </li>
             <?php endif; ?>
-            
+
             <?php if ($this->user->hasPermission('view_configuration')) : ?>
-            <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "config") ? "active" : "") ?>">
-                <a href="<?php echo base_url('admin/configuration'); ?>" title="Configuração Geral">
-                    <i class="fa fa-cogs"></i>
-                    <span>Configuração</span>
-                </a>
-            </li>
+                <li class="has-sub <?= (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "config") ? "active" : "") ?>">
+                    <a href="<?php echo base_url('admin/configuration'); ?>" title="Configuração Geral">
+                        <i class="fa fa-cogs"></i>
+                        <span>Configuração</span>
+                    </a>
+                </li>
             <?php endif; ?>
 
             <li class="has-sub">
@@ -119,6 +67,20 @@
                     <span>Ver Site</span>
                 </a>
             </li>
+
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-book"></i>
+                    <span>Menu</span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="">
+                        <a href="<?php echo base_url('admin'); ?>" title="Ver Menu">Ver Menu</a>
+                    </li>
+                </ul>
+            </li>
+
             <!-- begin sidebar minify button -->
             <li>
                 <a href="<?php echo base_url('admin'); ?>" class="sidebar-minify-btn" data-click="sidebar-minify">
