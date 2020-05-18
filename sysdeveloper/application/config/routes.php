@@ -80,6 +80,10 @@ $route['admin/permissions/update']['post'] = 'permission/update';
 $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
 $route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
 
+// PAGES
+$route['admin/page'] = 'page';
+$route['admin/page/new'] = 'page/page_create';
+
 // CONFIGURATIONS GERAL
 $route['admin/configuration'] = 'configuration';
 

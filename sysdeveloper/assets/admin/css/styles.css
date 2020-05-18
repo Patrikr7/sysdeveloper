@@ -6,6 +6,10 @@ DEFAULT
     cursor: pointer;
 }
 
+.display-none {
+    display: none;
+}
+
 
 /*
 BREADCRUMB

@@ -109,20 +109,16 @@ class User extends CI_Controller
             $json['error'] = validation_errors();
             $json['focus'] = 'user_email';
 
-        elseif ($this->form_validation->set_rules('user_login', 'Login', 'trim|required|min_length[3]|is_unique[tb_user.user_login]')->run() === false) :
+        elseif ($this->form_validation->set_rules('user_login', 'Login', 'trim|required|min_length[3]|max_length[12]|is_unique[tb_user.user_login]')->run() === false) :
             $json['error'] = validation_errors();
             $json['focus'] = 'user_login';
 
-        elseif ($this->form_validation->set_rules('user_pass', 'Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+        elseif ($this->form_validation->set_rules('user_pass', 'Senha', 'trim|required|min_length[6]|max_length[12]|callback_validator_password')->run() === false) :
             $json['error'] = validation_errors();
             $json['focus'] = 'user_pass';
 
-        elseif ($this->form_validation->set_rules('user_cpass', 'Confirmar Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+        elseif ($this->form_validation->set_rules('user_cpass', 'Confirmar Senha', 'trim|required|min_length[6]|max_length[12]|matches[user_pass]')->run() === false) :
             $json['error'] = validation_errors();
-            $json['focus'] = 'user_cpass';
-
-        elseif ($dados['user_pass'] != $dados['user_cpass']) :
-            $json['error'] = 'Senha diferente!';
             $json['focus'] = 'user_cpass';
 
         elseif ($this->form_validation->set_rules('user_status', 'Status', 'trim|required')->run() === false) :
@@ -221,8 +217,6 @@ class User extends CI_Controller
         $dados = $this->input->post();
 
         $id = $this->user->getUserId($dados['user_id']);
-        $login = $this->user->getLoginJoin($dados['user_login']);
-        $email = $this->user->getUserEmail($dados['user_email']);
         $url = $this->user->getUserUrl($dados['user_name'], $dados['user_id']);
 
         if ($this->form_validation->set_rules('user_name', 'Nome', 'trim|required|min_length[5]|alpha_numeric_spaces')->run() === false) :
@@ -233,7 +227,7 @@ class User extends CI_Controller
             $json['error'] = validation_errors();
             $json['focus'] = 'user_email';
 
-        elseif ($email && ($dados['user_id'] !== $email['user_id'])) :
+        elseif ($this->getEmail($dados['user_id'], $dados['user_email'])) :
             $json["error"] = 'O email <strong>' . $dados['user_email'] . '</strong> já existe';
             $json['focus'] = 'user_email';
 
@@ -241,20 +235,16 @@ class User extends CI_Controller
             $json['error'] = validation_errors();
             $json['focus'] = 'user_login';
 
-        elseif ($login && ($dados['user_id'] !== $login->user_id)) :
+        elseif ($this->getLogin($dados['user_id'], $dados['user_login'])) :
             $json["error"] = 'O login <strong>' . $dados['user_login'] . '</strong> já existe';
             $json['focus'] = 'user_login';
 
-        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_pass', 'Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_pass', 'Senha', 'trim|required|min_length[6]|max_length[12]|callback_validator_password')->run() === false) :
             $json['error'] = validation_errors();
             $json['focus'] = 'user_pass';
 
-        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_cpass', 'Confirmar Senha', 'trim|required|min_length[4]|callback_validator_password')->run() === false) :
+        elseif (!empty($dados['user_pass']) && $this->form_validation->set_rules('user_cpass', 'Confirmar Senha', 'trim|required|min_length[6]|max_length[12]|matches[user_pass]')->run() === false) :
             $json['error'] = validation_errors();
-            $json['focus'] = 'user_cpass';
-
-        elseif (!empty($dados['user_pass']) && ($dados['user_pass'] != $dados['user_cpass'])) :
-            $json['error'] = 'Senha diferente!';
             $json['focus'] = 'user_cpass';
 
         elseif ($this->form_validation->set_rules('user_status', 'Status', 'trim|required')->run() === false) :
@@ -362,6 +352,26 @@ class User extends CI_Controller
         endif;
 
         echo json_encode($json);
+    }
+
+    // VERIFICA SE JÁ EXISTE O MESMO LOGIN
+    public function getLogin($user_id, $user_login)
+    {
+        $login = $this->user->getLoginJoin($user_login);
+
+        if ($login && ($user_id !== $login->user_id)) :
+            return true;
+        endif;
+    }
+
+    // VERIFICA SE JÁ EXISTE O MESMO EMAIL
+    public function getEmail($user_id, $user_email)
+    {
+        $email = $this->user->getUserEmail($user_email);
+
+        if ($email && ($user_id !== $email['user_id'])) :
+            return true;
+        endif;
     }
 
     public function delete()
@@ -601,7 +611,7 @@ class User extends CI_Controller
         if (PasswordRegex($pass)) :
             return true;
         else :
-            $this->form_validation->set_message('validator_password', 'Senha deve conter: Letra maiúscula e minúscula, numéro e caracter especiais!');
+            $this->form_validation->set_message('validator_password', 'Senha deve conter: Letra maiúscula, minúscula, numéro e caracteres especiais!');
             return false;
         endif;
     }

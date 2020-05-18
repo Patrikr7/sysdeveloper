@@ -39,11 +39,18 @@
 
                         <div class="col-md-6 form-group">
                             <label class="control-label">Senha *</label>
-                            <input type="password" class="form-control" id="user_pass" name="user_pass" min="4" maxlength="12">
+                            <input type="password" class="form-control regex_password" id="user_pass" name="user_pass" min="6" maxlength="12">
+                            <div class="message_trigger">
+                                <p class="trigger_password_1 mb-0 display-none">- A Senha deve ter de 6 a 12 caracteres;</p>
+                                <p class="trigger_password_2 mb-0 display-none">- A Senha deve ter letras minúsculas;</p>
+                                <p class="trigger_password_3 mb-0 display-none">- A Senha deve ter letras maiúsculas;</p>
+                                <p class="trigger_password_4 mb-0 display-none">- A Senha deve ter números;</p>
+                                <p class="trigger_password_5 mb-0 display-none">- A Senha deve ter caracteres especiais;</p>
+                            </div>
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="control-label">Confirmar Senha *</label>
-                            <input type="password" class="form-control" id="user_cpass" name="user_cpass" min="4" maxlength="12">
+                            <input type="password" class="form-control" id="user_cpass" name="user_cpass" min="6" maxlength="12">
                         </div>
 
                         <div class="col-md-6 form-group">

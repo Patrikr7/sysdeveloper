@@ -30,12 +30,47 @@ $('.custom-file-input').on('change', function() {
 // REGEX PASSWORD
 $('.regex_password').on('keyup', function() {
     var value = $(this).val();
-    var regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W+)(?=^.{6,10}$).*$/;
+    var regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W+)(?=^.{6,12}$).*$/;
+    var regex_1 = /(?=^.{6,12}$).*$/;
+    var regex_2 = /(?=.*[a-z]).*$/;
+    var regex_3 = /(?=.*[A-Z]).*$/;
+    var regex_4 = /(?=.*[0-9]).*$/;
+    var regex_5 = /(?=.*\W+).*$/;
 
     if (regex.test(value)) {
         $('.trigger_password').removeClass("text-danger").addClass("text-success").html("Correto");
     } else {
-        $('.trigger_password').removeClass("text-success").addClass("text-danger").html("A Senha deve ter: Letras minúsculas, maiúsculas, números e caracteres especiais!");
+        $('.trigger_password').removeClass("text-success").addClass("text-danger").html("A Senha deve ter de 6 a 12 caracteres contendo: Letras minúsculas, maiúsculas, números e caracteres especiais!");
+    }
+
+    if (regex_1.test(value)) {
+        $('.trigger_password_1').removeClass("text-danger").addClass("text-success").html("Correto").hide();
+    } else {
+        $('.trigger_password_1').removeClass("text-success").addClass("text-danger").html("- A Senha deve ter de 6 a 12 caracteres;").show();
+    }
+
+    if (regex_2.test(value)) {
+        $('.trigger_password_2').removeClass("text-danger").addClass("text-success").html("Correto").hide();
+    } else {
+        $('.trigger_password_2').removeClass("text-success").addClass("text-danger").html("- A Senha deve ter letras minúsculas;").show();
+    }
+
+    if (regex_3.test(value)) {
+        $('.trigger_password_3').removeClass("text-danger").addClass("text-success").html("Correto").hide();
+    } else {
+        $('.trigger_password_3').removeClass("text-success").addClass("text-danger").html("- A Senha deve ter letras maiúsculas;").show();
+    }
+
+    if (regex_4.test(value)) {
+        $('.trigger_password_4').removeClass("text-danger").addClass("text-success").html("Correto").hide();
+    } else {
+        $('.trigger_password_4').removeClass("text-success").addClass("text-danger").html("- A Senha deve ter números;").show();
+    }
+
+    if (regex_5.test(value)) {
+        $('.trigger_password_5').removeClass("text-danger").addClass("text-success").html("Correto").hide();
+    } else {
+        $('.trigger_password_5').removeClass("text-success").addClass("text-danger").html("- A Senha deve ter caracteres especiais;").show();
     }
 });
 
