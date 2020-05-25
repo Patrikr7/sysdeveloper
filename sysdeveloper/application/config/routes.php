@@ -55,17 +55,48 @@ $route['admin'] = 'admin';
 $route['admin/login'] = 'user/login';
 $route['admin/lockscreen'] = 'user/lockscreen';
 $route['admin/reset'] = 'user/reset';
+$route['admin/forgot-password'] = 'user/forgot_password';
+$route['admin/redefine-password/(:any)'] = 'user/redefine_password/$1';
+$route['admin/forgot-password/send']['post'] = 'user/forgot_password_send';
+$route['admin/redefine-password-send']['post'] = 'user/redefine_password_send';
 $route['admin/login/access']['post'] = 'user/access';
 $route['admin/unlock']['post'] = 'user/unlock';
 $route['admin/logout']['post'] = 'user/logout';
 
 // ADMIN/USER
 $route['admin/users'] = 'user';
-$route['admin/users/create'] = 'user/page_create';
+$route['admin/users/new'] = 'user/page_create';
 $route['admin/users/view/(:any)'] = 'user/page_update';
-$route['admin/users/new']['post'] = 'user/create';
+$route['admin/users/create']['post'] = 'user/create';
 $route['admin/users/update']['post'] = 'user/update';
+$route['admin/users/delete']['post'] = 'user/delete';
 
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
+// PERMISSION/GROUP
+$route['admin/nopermission'] = 'permission/nopermission';
+$route['admin/permissions'] = 'permission';
+$route['admin/permissions/group'] = 'permissiongroup/page_create';
+$route['admin/permissions/group/(:any)'] = 'permissiongroup/page_update';
+$route['admin/permissions/permission'] = 'permission/page_create';
+$route['admin/permissions/permission/(:any)'] = 'permission/page_update';
+$route['admin/permissions/create']['post'] = 'permission/create';
+$route['admin/permissions/update']['post'] = 'permission/update';
+$route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
+$route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
+
+// PAGES
+$route['admin/page'] = 'page';
+$route['admin/page/new'] = 'page/page_create';
+
+// CONFIGURATIONS GERAL
+$route['admin/configuration'] = 'configuration';
+$route['admin/configuration/update']['post'] = 'configuration/update';
+
+// PAGES SITE
+$route['default_controller'] = 'website';
+$route['([a-zA-Z0-9-]+)'] = 'website/page/$1';
+
+// ERRO 404
+$route['404_override'] = 'error404';
+
+
 $route['translate_uri_dashes'] = FALSE;

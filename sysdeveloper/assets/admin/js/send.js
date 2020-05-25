@@ -158,10 +158,16 @@ $('#form').on('submit', function(e) {
                     "timeOut": "5000",
                     "extendedTimeOut": "1000"
                 });
+                $("#" + data.focus).focus();
+                $("#" + data.focus).addClass("is-invalid");
                 form.find('.form_load').fadeOut(1000);
             }
         }
     });
+});
+
+$(".form-control").focusout(function() {
+    $(".form-control").removeClass("is-invalid")
 });
 
 // FILTRO PARA PESQUISA

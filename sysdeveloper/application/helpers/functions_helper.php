@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+if (!function_exists('getStatus')) :
+    // SELECIONA TODOS REGISTRO DA TABELA STATUS
+    function getStatus()
+    {
+        $ci = &get_instance();
+        return $ci->db->get('tb_status')->result_array();
+    }
+endif;
+
 if (!function_exists('set_msg')) :
     // SETA MENSAGEM VIA SESSION PARA SER EXIBIDA LIDA POSTERIORMENTE
     function set_msg($msg = null)
@@ -206,5 +215,20 @@ if (!function_exists('getCodeNumber')) :
         }
 
         return time() . $hash;
+    }
+endif;
+
+// PASSWORD
+if (!function_exists('PasswordRegex')) :
+    function PasswordRegex($pass)
+    {
+        if (isset($pass)) :
+            $pattern = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=.*[^a-zA-Z\d])\S*$/";
+            if (preg_match($pattern, $pass)) :
+                return true;
+            else :
+                return false;
+            endif;
+        endif;
     }
 endif;

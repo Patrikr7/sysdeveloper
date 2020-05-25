@@ -12,7 +12,7 @@
     <!-- end breadcrumb -->
     <!-- btn -->
     <div class="dash_breadcrumb_btn">
-    	<a href="<?php echo base_url('admin/users/create'); ?>" class="btn btn-success btn-xs" title="Novo Usuário">Novo Usuário</a>
+    	<a href="<?php echo base_url('admin/users/new'); ?>" class="btn btn-success btn-xs" title="Novo Usuário">Novo Usuário</a>
     </div>
     <!-- end btn -->
 </div>
@@ -27,12 +27,14 @@
                 </div>
             </div>
         <?php else: foreach($users as $Users): ?>
-            <article class="col-md-3 text-center">
+            <article class="col-md-3 text-center mb-4">
                 <div class="box h-100 text-center">
-                    <a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"] ?>"><img class="user-box-img rounded" src="<?php echo ($Users["user_img"] !== null) ? "/assets/uploads/users/".$Users['user_img'] : HOME."/assets/admin/img/user.png" ?>" alt="<?php echo $Users["user_name"]; ?>" title="<?php echo $Users["user_name"]; ?>"></a>
+                    <a href="<?php echo base_url('admin/users/view/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"] ?>">
+                        <img class="user-box-img rounded" src="<?php echo ($Users["user_img"] ? base_url('assets/uploads/users/'.$Users['user_img']) : base_url('assets/admin/img/user.png')); ?>" alt="<?php echo $Users["user_name"]; ?>" title="<?php echo $Users["user_name"]; ?>">
+                    </a>
                     <div class="box-content">
                         <header class="box-header">
-                            <h1><a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"]; ?>"><?php echo $Users["user_name"]; ?></a></h1>
+                            <h1><a href="<?php echo base_url('admin/users/view/'.$Users['user_url']); ?>" title="<?php echo $Users["user_name"]; ?>"><?php echo $Users["user_name"]; ?></a></h1>
                         </header>
                         <div class="box-text">
                             <p class="nivel"><i class="fa fa-tasks"></i> <?php echo $Users["g_name"]; ?></p>
@@ -42,7 +44,7 @@
                         </div>
                     </div>
                     <footer class="box-footer box-footer-dash b-t-1">
-                        <a href="<?php echo base_url('admin/users/update/'.$Users['user_url']); ?>" class="btn btn-xs btn-info transition" title="Editar Usuário"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a href="<?php echo base_url('admin/users/view/'.$Users['user_url']); ?>" class="btn btn-xs btn-info transition" title="Editar Usuário"><i class="fas fa-user-edit"></i> Editar</a>
                         <span class="btn btn-xs btn-danger transition button_action" rel="Deseja excluir?" callback="users" callback_action='delete' id="<?php echo $Users["user_id"]; ?>" title="Excluir Usuário"><i class="fas fa-times-circle"></i> Excluir</span>
                     </footer>
                 </div>

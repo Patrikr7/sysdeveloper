@@ -19,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css'); ?>" rel="stylesheet" />
 	<link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
-	<link href="<?php echo base_url('assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
+	<link href="<?php echo base_url('assets/plugins/font-awesome/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/toastr/toastr.min.css'); ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('assets/plugins/animate/animate.min.css'); ?>" rel="stylesheet" />
@@ -42,9 +42,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="news-feed">
                 <div class="news-image" style="background-image: url(<?php echo base_url('assets/admin/img/login-bg-2.jpg'); ?>)"></div>
                 <div class="news-caption">
-                    <h4 class="caption-title"><?php echo TITLE_NAME; ?></h4>
+                    <h4 class="caption-title"><?php echo getenv('SIS_NAME'); ?></h4>
                     <p>
-                        Com a System Web de administração, você usa o admin para gerenciar a conta da sua empresa, como adicionar novos usuários, gerenciar configurações de segurança e ativar os serviços que você deseja que sua equipe acesse.
+                        <?php echo getenv('SIS_INICIAL'); ?>
                     </p>
                 </div>
             </div>

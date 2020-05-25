@@ -8,16 +8,18 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->user->isLogged();
+		$this->user->setLoggedUser();
 	}
-	
+
 	public function index()
 	{
 		$dados = [
 			'title'   => 'Painel',
-			'title_page' => 'Painel Administrativo',
+			'title_page' => 'Painel Administrativo - ' . getenv('SIS_TITLE'),
 			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 			'menuActive' => ["menuPage" => "dash"]
 		];
+
 		$this->template->load('admin/template/template', 'admin/home', $dados);
 	}
 }
