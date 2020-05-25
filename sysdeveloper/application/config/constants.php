@@ -82,14 +82,4 @@ defined('EXIT_UNKNOWN_METHOD') OR define('EXIT_UNKNOWN_METHOD', 6); // unknown c
 defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user input
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
-<<<<<<< HEAD
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
-=======
-defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
-
-// Utilização em toda a aplicação
-define('AUTHOR', 'Developer :: Emerson Patrik');
-define('TITLE_NAME', 'Sys Developer');
-define('FAVICON', 'favicon.png');
-define('SITE_IMG', 'assets/img/site.jpg');
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407

@@ -20,11 +20,7 @@ class Permission extends CI_Controller
 		if ($this->user->hasPermission('view_permission')) :
 			$dados = [
 				'title'   => 'Permissão',
-<<<<<<< HEAD
 				'title_page' => 'Permissão - ' . getenv('SIS_TITLE'),	
-=======
-				'title_page' => 'Permissão',
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 				'g_permission' => $this->pgroups->getGroup(),
 				'permission' => $this->permission->getPermission(),
@@ -54,11 +50,7 @@ class Permission extends CI_Controller
 		if ($this->user->hasPermission('create_permission')) :
 			$dados = [
 				'title'   => 'Cadastrar Permissão',
-<<<<<<< HEAD
 				'title_page' => 'Cadastrar Permissão - ' . getenv('SIS_TITLE'),	
-=======
-				'title_page' => 'Cadastrar Permissão',
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 				'menuActive' => ["menuPage" => "PermissionsActive"]
 			];
@@ -76,11 +68,7 @@ class Permission extends CI_Controller
 		if ($this->user->hasPermission('update_permission')) :
 			$dados = [
 				'title'   => 'Atualizar Permissão',
-<<<<<<< HEAD
 				'title_page' => 'Atualizar Permissão - ' . getenv('SIS_TITLE'),	
-=======
-				'title_page' => 'Atualizar Permissão',
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 				'permission' => $this->permission->getPermissionUrl($this->uri->segment(4)),
 				'menuActive' => ["menuPage" => "PermissionsActive"]

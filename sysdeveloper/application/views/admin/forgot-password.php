@@ -20,11 +20,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
-<<<<<<< HEAD
     <link href="<?php echo base_url('assets/plugins/font-awesome/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
-=======
-    <link href="<?php echo base_url('assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     <link href="<?php echo base_url('assets/plugins/toastr/toastr.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/plugins/animate/animate.min.css'); ?>" rel="stylesheet" />

@@ -10,10 +10,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->user->setLoggedUser();
-<<<<<<< HEAD
         $this->load->model(['email_model' => 'email']);
-=======
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
         $this->load->library('upload', config_upload('./assets/uploads/', 'jpg|png', 1500, 'users'));
     }
 
@@ -23,17 +20,10 @@ class User extends CI_Controller
 
         if ($this->user->hasPermission('view_user')) :
             $dados = [
-<<<<<<< HEAD
                 'title'      => 'Usuários',
                 'title_page' => 'Usuários - ' . getenv('SIS_TITLE'),
                 'user'       => $this->user->getUserId($this->session->userOnline['user_id']),
                 'users'      => $this->user->getUsers($this->session->userOnline['user_title_level'], $this->session->userOnline['user_id']),
-=======
-                'title'   => 'Usuários',
-                'title_page' => 'Usuários',
-                'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-                'users' => $this->user->getUsers($this->session->userOnline['user_title_level'], $this->session->userOnline['user_id']),
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                 'menuActive' => [
                     "menuPage" => "UserActive",
                     "subPage" => "UserHome"
@@ -55,19 +45,11 @@ class User extends CI_Controller
 
         if ($this->user->hasPermission('create_user')) :
             $dados = [
-<<<<<<< HEAD
                 'title'      => 'Cadastrar Usuário',
                 'title_page' => 'Cadastrar Usuário - ' . getenv('SIS_TITLE'),
                 'user'       => $this->user->getUserId($this->session->userOnline['user_id']),
                 'level'      => $this->user->getLevelUser($this->session->userOnline["user_title_level"]),
                 'status'     => getStatus(),
-=======
-                'title'   => 'Cadastrar Usuário',
-                'title_page' => 'Cadastrar Usuário',
-                'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-                'level' => $this->user->getLevelUser($this->session->userOnline["user_title_level"]),
-                'status' => getStatus(),
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                 'menuActive' => [
                     "menuPage" => "UserActive",
                     "subPage" => "UserCreate"
@@ -92,21 +74,12 @@ class User extends CI_Controller
 
         elseif ($this->user->getUserUri($this->uri->segments[4])) :
             $dados = [
-<<<<<<< HEAD
                 'title'      => 'Atualizar Usuário',
                 'title_page' => 'Atualizar Usuário - ' . getenv('SIS_TITLE'),
                 'user'       => $this->user->getUserId($this->session->userOnline['user_id']),
                 'level'      => $this->user->getLevelUser($this->session->userOnline["user_title_level"]),
                 'status'     => getStatus(),
                 'user_url'   => $this->user->getUserUri($this->uri->segments[4]),
-=======
-                'title'   => 'Atualizar Usuário',
-                'title_page' => 'Atualizar Usuário',
-                'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-                'level' => $this->user->getLevelUser($this->session->userOnline["user_title_level"]),
-                'status' => getStatus(),
-                'user_url' => $this->user->getUserUri($this->uri->segments[4]),
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                 'menuActive' => [
                     "menuPage" => "UserActive"
                 ]
@@ -115,11 +88,7 @@ class User extends CI_Controller
 
         else :
             $dados = [
-<<<<<<< HEAD
                 'title'      => 'Erro 404',
-=======
-                'title'   => 'Erro 404',
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                 'title_page' => 'Erro 404 - Página NÃO encontrada',
                 'user' => $this->user->getUserId($this->session->userOnline['user_id'])
             ];
@@ -171,11 +140,7 @@ class User extends CI_Controller
             $dados['user_url'] = $url;
             $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
             $dados["user_cpass"] = $dados['user_pass'];
-<<<<<<< HEAD
             $dados["user_uuid"] = $this->uuid->v4();
-=======
-            $dados["user_cod"] = getCode(45);
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 
             if ($this->user->create($dados)) :
 
@@ -219,11 +184,7 @@ class User extends CI_Controller
                     $dados['user_url'] = $url;
                     $dados["user_pass"] = password_hash($dados["user_pass"], PASSWORD_BCRYPT);
                     $dados["user_cpass"] = $dados['user_pass'];
-<<<<<<< HEAD
                     $dados["user_uuid"] = $this->uuid->v4();
-=======
-                    $dados["user_cod"] = getCode(45);
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 
                     if ($this->user->create($dados)) :
                         // RENOMEIA A IMAGEM DENTRO DA PASTA
@@ -314,11 +275,7 @@ class User extends CI_Controller
                 unset($dados["user_pass"], $dados["user_cpass"]);
             endif;
 
-<<<<<<< HEAD
             $dados["user_uuid"] = $this->uuid->v4();
-=======
-            $dados["user_cod"] = getCode(45);
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 
             if ($this->user->update($dados)) :
 
@@ -369,11 +326,7 @@ class User extends CI_Controller
                         unset($dados["user_pass"], $dados["user_cpass"]);
                     endif;
 
-<<<<<<< HEAD
                     $dados["user_uuid"] = $this->uuid->v4();
-=======
-                    $dados["user_cod"] = getCode(45);
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 
                     if ($this->user->update($dados)) :
                         // RENOMEIA A IMAGEM DENTRO DA PASTA
@@ -412,11 +365,7 @@ class User extends CI_Controller
         endif;
     }
 
-<<<<<<< HEAD
     // VERIFICA SE JÁ EXISTE O MESMO EMAIL 
-=======
-    // VERIFICA SE JÁ EXISTE O MESMO EMAIL
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     public function getEmail($user_id, $user_email)
     {
         $email = $this->user->getUserEmail($user_email);
@@ -491,17 +440,12 @@ class User extends CI_Controller
     {
         $dados = [
             'title'   => 'Recuperar Senha',
-<<<<<<< HEAD
             'title_page' => 'Recuperar Senha - ' . getenv('SIS_TITLE'),
-=======
-            'title_page' => 'Recuperar Senha',
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
         ];
 
         $this->load->view('admin/forgot-password', $dados);
     }
 
-<<<<<<< HEAD
     public function redefine_password($uuid)
     {
         if ($this->user->getUuid($uuid)) :
@@ -568,8 +512,6 @@ class User extends CI_Controller
         echo json_encode($json);
     }
 
-=======
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     public function access()
     {
         $json = [];

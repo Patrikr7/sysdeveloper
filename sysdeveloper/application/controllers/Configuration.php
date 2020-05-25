@@ -7,14 +7,12 @@ class Configuration extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-<<<<<<< HEAD
 		$this->user->isLogged();
 		$this->user->setLoggedUser();
 	}
 
 	public function index()
 	{
-		//var_dump($this->configurations->getGroupConfigurations()); die;
 		$dados = [
 			'title'   => 'Configuração',
 			'title_page' => 'Configuração - ' . getenv('SIS_TITLE'),
@@ -39,20 +37,4 @@ class Configuration extends CI_Controller
 
 		echo json_encode($json);
 	}
-=======
-        $this->user->isLogged();
-        $this->user->setLoggedUser();
-	}
-	
-	public function index()
-	{
-		$dados = [
-			'title'   => 'Configuração',
-			'title_page' => 'Configuração',
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-			'menuActive' => ["menuPage" => "config"]
-		];
-		$this->template->load('admin/template/template', 'admin/view/config/view-home', $dados);
-	}
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 }
