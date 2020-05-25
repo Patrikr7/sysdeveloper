@@ -20,7 +20,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" />
+<<<<<<< HEAD
     <link href="<?php echo base_url('assets/plugins/font-awesome/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
+=======
+    <link href="<?php echo base_url('assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css'); ?>" rel="stylesheet" />
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     <link href="<?php echo base_url('assets/plugins/toastr/toastr.min.css'); ?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/plugins/animate/animate.min.css'); ?>" rel="stylesheet" />
@@ -43,9 +47,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="news-feed">
                 <div class="news-image" style="background-image: url(<?php echo base_url('assets/admin/img/login-bg-9.jpg'); ?>)"></div>
                 <div class="news-caption">
+<<<<<<< HEAD
                     <h4 class="caption-title"><?php echo getenv('SIS_NAME'); ?></h4>
                     <p>
                         <?php echo getenv('SIS_INICIAL'); ?>
+=======
+                    <h4 class="caption-title"><?php echo TITLE_NAME; ?></h4>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere velit fermentum ligula dapibus, eu placerat ligula dapibus. Nam et orci ut mi rutrum dapibus sed in dolor. Phasellus tempus luctus nulla sed placerat.
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                     </p>
                 </div>
             </div>
@@ -60,7 +70,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!-- end register-header -->
                 <!-- begin register-content -->
                 <div class="register-content">
+<<<<<<< HEAD
                     <form id="form_login" class="margin-bottom-0" method="post" action="forgot-password/send" enctype="multipart/form-data">
+=======
+                    <form id="form_login" class="margin-bottom-0" name="form_login" method="post" action="" enctype="multipart/form-data">
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                         <label class="control-label">Email <span class="text-danger">*</span></label>
                         <div class="row m-b-15">
                             <div class="col-md-12">

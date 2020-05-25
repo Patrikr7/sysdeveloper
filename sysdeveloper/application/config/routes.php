@@ -54,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['admin'] = 'admin';
 $route['admin/login'] = 'user/login';
 $route['admin/lockscreen'] = 'user/lockscreen';
+$route['admin/forgot-password'] = 'user/forgot_password';
 $route['admin/reset'] = 'user/reset';
 $route['admin/forgot-password'] = 'user/forgot_password';
 $route['admin/redefine-password/(:any)'] = 'user/redefine_password/$1';
@@ -89,7 +90,10 @@ $route['admin/page/new'] = 'page/page_create';
 
 // CONFIGURATIONS GERAL
 $route['admin/configuration'] = 'configuration';
+<<<<<<< HEAD
 $route['admin/configuration/update']['post'] = 'configuration/update';
+=======
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 
 // PAGES SITE
 $route['default_controller'] = 'website';

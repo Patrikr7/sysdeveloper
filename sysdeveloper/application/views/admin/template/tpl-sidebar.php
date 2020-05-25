@@ -26,7 +26,11 @@
                 </a>
             </li>
 
+<<<<<<< HEAD
             <?php if ($this->user->hasPermission('view_page') && intval(getenv('SIS_PAGE')) === 1) : ?>
+=======
+            <?php if ($this->user->hasPermission('view_page')) : ?>
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
                 <li class="has-sub <?php echo (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "PageActive") ? "active" : ""); ?>">
                     <a href="javascript:;">
                         <b class="caret"></b>

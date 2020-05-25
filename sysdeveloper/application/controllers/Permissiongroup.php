@@ -19,7 +19,11 @@ class Permissiongroup extends CI_Controller
 	{
 		$dados = [
 			'title'   => 'Cadastrar Grupo de Permissão',
+<<<<<<< HEAD
 			'title_page' => 'Cadastrar Grupo de Permissão - ' . getenv('SIS_TITLE'),	
+=======
+			'title_page' => 'Cadastrar Grupo de Permissão',
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 			'permissions' => $this->permission->getPermission(),
 			'menuActive' => ["menuPage" => "PermissionsActive"]
@@ -32,7 +36,11 @@ class Permissiongroup extends CI_Controller
 		if ($this->pgroups->getGroupUrl($this->uri->segment(4))) :
 			$dados = [
 				'title'   => 'Atualizar Grupo de Permissão',
+<<<<<<< HEAD
 				'title_page' => 'Atualizar Grupo de Permissão - ' . getenv('SIS_TITLE'),	
+=======
+				'title_page' => 'Atualizar Grupo de Permissão',
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
 				'permissions' => $this->permission->getPermission(),
 				'pgroups' => $this->pgroups->getGroupUrl($this->uri->segment(4)),

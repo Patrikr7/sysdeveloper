@@ -27,8 +27,11 @@
 			<?php 
 			echo "<br><br>"; 
 			echo "UUID4: " . $this->uuid->v4();
+<<<<<<< HEAD
 			echo "<br><br>";
 			echo "DOTENV: " . getenv('SIS_TITLE');
+=======
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 			?>
 		</div>
 	</div>

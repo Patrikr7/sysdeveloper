@@ -18,7 +18,11 @@ class Website extends CI_Controller
 			'title'   => 'INICIAL TEMPLATE',
 			'description' => 'DESCRIPTION',
 			'image' => 'site.jpg',
+<<<<<<< HEAD
 			'title_page' => getenv('SITE_NAME'),
+=======
+			'title_page' => 'TITLE PAGE',
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 			'message' => 'Aqui você encontra a página de teste!',
 			'url' => ""
 		);

@@ -15,7 +15,11 @@ class Page extends CI_Controller
     {
         $dados = [
             'title'   => 'Páginas',
+<<<<<<< HEAD
             'title_page' => 'Páginas - ' . getenv('SIS_TITLE'),	
+=======
+            'title_page' => 'Páginas',
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
             'user' => $this->user->getUserId($this->session->userOnline['user_id']),
             'menuActive' => [
                 "menuPage" => "PageActive",
@@ -29,7 +33,11 @@ class Page extends CI_Controller
     {
         $dados = [
             'title'   => 'Cadastrar Página',
+<<<<<<< HEAD
             'title_page' => 'Cadastrar Página - ' . getenv('SIS_TITLE'),	
+=======
+            'title_page' => 'Cadastrar Página',
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
             'user' => $this->user->getUserId($this->session->userOnline['user_id']),
             'menuActive' => [
                 "menuPage" => "PageActive",

@@ -44,6 +44,7 @@ class User_model extends CI_Model
     {
         return $this->db->get_where($this->table, array('user_email' => $email))->row_array();
     }
+<<<<<<< HEAD
 
     //BUSCA USER PELA URI
     public function getUserUri($uri)
@@ -59,6 +60,16 @@ class User_model extends CI_Model
         return $query->row();
     }
 
+=======
+
+    //BUSCA USER PELA URI
+    public function getUserUri($uri)
+    {
+        $query = $this->db->get_where($this->table, array('user_url' => $uri));
+        return $query->row();
+    }
+
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     //CONFIGURA A URL
     public function getUserUrl($name, $id)
     {
@@ -159,6 +170,7 @@ class User_model extends CI_Model
         $this->db->update('tb_online', $data);
     }
 
+<<<<<<< HEAD
     // ATUALIZA A SENHA
     public function updatePassword($data)
     {
@@ -173,6 +185,8 @@ class User_model extends CI_Model
         endif;
     }
 
+=======
+>>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     public function delete($id)
     {
         $this->db->delete($this->table, array('user_id' => $id));
