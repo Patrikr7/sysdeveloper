@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 define('DS', DIRECTORY_SEPARATOR);
+//var_dump(DS); die;
 
 if (!function_exists('_getConfig')) {
     function _getConfig()

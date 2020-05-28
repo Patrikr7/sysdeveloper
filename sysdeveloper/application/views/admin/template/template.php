@@ -20,14 +20,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta content="<?php echo AUTHOR; ?>" name="author" />
     <link rel="base" href="<?php echo base_url('admin/') ?>" />
 
-    <?php /* var_dump(assets_css('admin', [
-        'style.min.css',
-        'style-responsive.min.css',
-        'default.css',
-        'styles.css',
-    ]));
-    die; */ ?>
-
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <?php
@@ -37,12 +29,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
     echo assets_css('plugins/animate', 'animate.min.css');
     echo assets_css('plugins/toastr', 'toastr.min.css');
     echo assets_css('plugins/sweetalert', 'sweetalert.css');
+
+    if(!empty($styles) || isset($styles)):
+        foreach($styles as $style => $value) :
+            echo assets_js($value['dir'], $value['file']);
+        endforeach;
+    endif;
+
     echo assets_css('admin/css', [
         'style.min.css',
         'style-responsive.min.css',
         'default.css',
         'styles.css',
-    ]);     
+    ]);
     ?>
     <!-- ================== END BASE CSS STYLE ================== -->
 
@@ -82,26 +81,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <!-- end page container -->
 
     <!--[if lt IE 9]>
-        <script src="<?php echo base_url('assets/admin/crossbrowserjs/html5shiv.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/admin/crossbrowserjs/respond.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/admin/crossbrowserjs/excanvas.min.js'); ?>"></script>
+        <?php echo assets_js('admin/crossbrowserjs', [
+            'html5shiv.js',
+            'respond.min.js',
+            'excanvas.min.js'
+        ]); ?>
     <![endif]-->
 
     <!-- ================== BEGIN BASE JS ================== -->
-    <script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/jquery/jquery-form.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/jquery/jquery.maskedinput.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/jquery/jquery.maskMoney.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/js-cookie/js.cookie.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/plugins/sweetalert/sweetalert.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/js/default.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/js/apps.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/boot.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/js/function.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/js/send.js'); ?>"></script>
+    <?php 
+        echo assets_js('plugins', [
+            'jquery/jquery.min.js',
+            'jquery/jquery-form.js',
+            'bootstrap/js/bootstrap.bundle.min.js',
+            'jquery/jquery.maskedinput.min.js',
+            'jquery/jquery.maskMoney.min.js',
+            'slimscroll/jquery.slimscroll.min.js',
+            'js-cookie/js.cookie.js',
+            'toastr/toastr.min.js',
+            'sweetalert/sweetalert.min.js'    
+        ]);
+
+        if(!empty($scripts) || isset($scripts)):
+            foreach($scripts as $script => $value) :
+                echo assets_js($value['dir'], $value['file']);
+            endforeach;
+        endif;
+        
+        echo assets_js('admin/js', [
+            'default.min.js',
+            'apps.js'
+        ]);
+        
+        echo assets_js('js', 'boot.js');
+
+        echo assets_js('admin/js', [
+            'function.js',
+            'send.js'
+        ]);
+    ?>    
     <!-- ================== END BASE JS ================== -->
 
     <script>

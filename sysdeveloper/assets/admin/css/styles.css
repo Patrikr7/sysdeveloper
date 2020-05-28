@@ -61,7 +61,6 @@ USERS/CLIENTS
 
 
 /*
-<<<<<<< HEAD
 CONFIGURATION
 */
 
@@ -109,8 +108,72 @@ CONFIGURATION
 
 
 /*
-=======
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
+CATEGORIES/PAGES
+*/
+
+.dash_pages_section {
+    padding: 20px 20px 0;
+    margin-bottom: 30px;
+    background: #FCFCFC;
+    float: left;
+    width: 100%;
+    border-bottom: 10px solid #ccc;
+}
+
+.dash_pages_section:last-of-type {
+    margin-bottom: 0;
+}
+
+.dash_pages_section_header h1 {
+    font-size: 20px;
+    margin: 0 0 5px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.dash_pages_section_content {
+    border-bottom: 1px solid #ccc;
+}
+
+.dash_pages_section_sub_header h2 {
+    font-size: 18px;
+    text-align: center;
+    margin: 15px 0 !important;
+    font-weight: 600;
+    color: #999;
+}
+
+.dash_pages_section_sub_article {
+    margin: 0 0px 20px 0;
+    padding: 10px;
+    background: #eee;
+    text-align: left;
+}
+
+.dash_pages_section_sub_article_header h1 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.dash_pages_section_content p,
+.dash_pages_section_sub_article_content p {
+    margin: 7px;
+}
+
+.dash_categories {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 7px 0;
+}
+
+.dash_categories_item_sub {
+    padding-left: 20px;
+}
+
+
+/*
 BOX
 */
 

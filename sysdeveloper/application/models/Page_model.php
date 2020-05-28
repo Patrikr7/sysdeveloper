@@ -9,17 +9,39 @@ class Page_model extends CI_Model
         parent::__construct();
     }
 
-    public function getPages()
+    public function getPageParentNull($id = null)
     {
-        $this->db->select()
-            ->from($this->table)
-            ->order_by('page_title', 'ASC');
-        return $this->db->get()->result_array();
+        if ($id === null) :
+            $this->db->select('*')
+                ->from($this->table)
+                ->where('page_parent IS NULL OR page_parent = 0')
+                ->order_by('page_title', 'ASC');
+            return $this->db->get()->result_array();
+        
+        else :
+            $this->db->select('*')
+                ->from($this->table)
+                ->where('page_id !=', $id)
+                ->where('page_parent IS NULL OR page_parent = 0')
+                ->order_by('page_title', 'ASC');
+            return $this->db->get()->result_array();
+        
+        endif;
     }
 
     public function getPageUrl($uri)
     {
         return $this->db->get_where($this->table, array('page_url' => $uri))->row();
+    }
+
+    // PESQUISA SE EXITE PAGINA COMO FILHA CADASTRADA
+    public function getSubPages($page_id)
+    {
+        $this->db->select()
+            ->from($this->table)
+            ->where('page_parent', $page_id)
+            ->order_by('page_title', 'ASC');
+        return $this->db->get()->result_array();
     }
 
     public function getPermissionName($name)

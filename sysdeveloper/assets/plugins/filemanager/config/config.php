@@ -1,5 +1,6 @@
 <?php
 $version = "9.12.1";
+
 if (session_id() == '') session_start();
 
 mb_internal_encoding('UTF-8');
@@ -67,7 +68,7 @@ $config = array(
 	| without final / (DON'T TOUCH)
 	|
 	*/
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/Sistemas/sis_coloradmin",
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/Clig/Project02_bk_27-05/sysdeveloper",
 	/*'base_url' => HOME,*/
 	/*
 	|--------------------------------------------------------------------------
@@ -77,7 +78,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => '/uploads/img_content/source/',
+	'upload_dir' => '/assets/uploads/img_content/source/',
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -86,7 +87,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../../../uploads/img_content/source/',
+	'current_path' => '../../../assets/uploads/img_content/source/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -97,7 +98,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../../../uploads/img_content/thumbs/',
+	'thumbs_base_path' => '../../../assets/uploads/img_content/thumbs/', 
 
 
 	/*
@@ -429,8 +430,6 @@ $config = array(
 	'remember_text_filter'                    => false,
 
 );
-
-//var_dump($config); die;
 
 return array_merge(
 	$config,

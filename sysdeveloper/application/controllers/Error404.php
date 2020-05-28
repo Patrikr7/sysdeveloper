@@ -11,7 +11,7 @@ class Error404 extends CI_Controller
 
 	public function index()
 	{
-		if(!empty($this->uri->segments[1]) && $this->uri->segments[1] === 'admin'):
+		if($this->uri->segments[1] === 'admin'):
 			$this->user->setLoggedUser();
 			$this->user->isLogged();
 			
@@ -33,6 +33,7 @@ class Error404 extends CI_Controller
 			);
 
 			$this->template->load('site/template/template', '404', $dados);
+			
 		endif;
 	}
 }

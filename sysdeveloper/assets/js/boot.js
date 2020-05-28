@@ -116,7 +116,7 @@ $(document).ready(function() {
                 "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
             ],
             toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
-            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | preview code ",
             image_advtab: true,
 
             relative_urls: false,
@@ -125,7 +125,12 @@ $(document).ready(function() {
             filemanager_title: "Upload",
             external_plugins: {
                 "filemanager": BASE + "../assets/plugins/filemanager/plugin.min.js"
-            }
+            },
+
+            content_css: [
+                'https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                'https://www.tiny.cloud/css/codepen.min.css'
+            ],
         });
     }
 
@@ -142,8 +147,8 @@ $(document).ready(function() {
             ],
             toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
             content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tiny.cloud/css/codepen.min.css'
+                'https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                'https://www.tiny.cloud/css/codepen.min.css'
             ]
         });
     }
