@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/Clig/Project02_bk_27-05/sysdeveloper/';
+$config['base_url'] = 'http://localhost/Sistemas/sis_codeigniter/version-one/sysdeveloper/';
 
 /*
 |--------------------------------------------------------------------------

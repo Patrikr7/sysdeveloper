@@ -4,17 +4,12 @@
         <h1 class="page-header">Configuração Geral</h1>
     </header>
     <!-- end page-header -->
-<<<<<<< HEAD
     <!-- begin breadcrumb -->
-=======
-    <!-- begin breadcrumb -->    
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo base_url('admin'); ?>" title="Painel Inicial">Dashboard</a></li>
         <li class="breadcrumb-item active">Configuração</li>
     </ol>
     <!-- end breadcrumb -->
-<<<<<<< HEAD
 </div>
 
 <div class="content dash_config">
@@ -69,6 +64,4 @@
             <?php endforeach; ?>
         </div>
     </div>
-=======
->>>>>>> 41a7919cd8349e392a820f468268b365283ca407
 </div>

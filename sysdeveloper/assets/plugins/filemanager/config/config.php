@@ -68,7 +68,7 @@ $config = array(
 	| without final / (DON'T TOUCH)
 	|
 	*/
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/Clig/Project02_bk_27-05/sysdeveloper",
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"). "://". @$_SERVER['HTTP_HOST']."/Sistemas/sis_codeigniter/version-one/sysdeveloper",
 	/*'base_url' => HOME,*/
 	/*
 	|--------------------------------------------------------------------------

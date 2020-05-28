@@ -9,5 +9,5 @@ Options All -Indexes
 # URL Rewrite
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^(.*)$ /Clig/Project02_bk_27-05/sysdeveloper/index.php/$1 [L]
+RewriteRule ^(.*)$ /Sistemas/sis_codeigniter/version-one/sysdeveloper/index.php/$1 [L]
 </IfModule>
