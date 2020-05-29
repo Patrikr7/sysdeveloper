@@ -20,6 +20,74 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta content="<?php echo AUTHOR; ?>" name="author" />
     <link rel="base" href="<?php echo base_url('admin/') ?>" />
 
+
+    <style>
+        /*.pagination {
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            padding-left: 0 !important;
+            list-style: none !important;
+            border-radius: 0 !important;
+        }
+
+        .pagination>li>a {
+            border-radius: 0 !important;
+        }
+
+        .page-link {
+            position: relative !important;
+            display: block !important;
+            padding: 0.5rem 0.75rem !important;
+            margin-left: -1px !important;
+            line-height: 1.25 !important;
+            color: #2FA4E7 !important;
+            background-color: #fff !important;
+            border: 1px solid #dee2e6 !important;
+        }
+
+        .page-link:hover {
+            z-index: 2 !important;
+            color: #157ab5 !important;
+            text-decoration: none !important;
+            background-color: #e9ecef !important;
+            border-color: #dee2e6 !important;
+        }
+
+        .page-link:focus {
+            z-index: 3 !important;
+            outline: 0 !important;
+            -webkit-box-shadow: 0 0 0 0.2rem rgba(47, 164, 231, 0.25) !important;
+            box-shadow: 0 0 0 0.2rem rgba(47, 164, 231, 0.25) !important;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0 !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+
+        .page-item.disabled .page-link {
+            z-index: 3 !important;
+            color: #fff !important;
+            background-color: #2FA4E7 !important;
+            border-color: #2FA4E7 !important;
+        }
+
+        .page-item.disabled .page-link {
+            color: #868e96 !important;
+            pointer-events: none !important;
+            cursor: auto !important;
+            background-color: #fff !important;
+            border-color: #dee2e6 !important;
+        }*/
+    </style>
+
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <?php
@@ -30,8 +98,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
     echo assets_css('plugins/toastr', 'toastr.min.css');
     echo assets_css('plugins/sweetalert', 'sweetalert.css');
 
-    if(!empty($styles) || isset($styles)):
-        foreach($styles as $style => $value) :
+    if (!empty($styles) || isset($styles)) :
+        foreach ($styles as $style => $value) :
             echo assets_js($value['dir'], $value['file']);
         endforeach;
     endif;
@@ -89,37 +157,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <![endif]-->
 
     <!-- ================== BEGIN BASE JS ================== -->
-    <?php 
-        echo assets_js('plugins', [
-            'jquery/jquery.min.js',
-            'jquery/jquery-form.js',
-            'bootstrap/js/bootstrap.bundle.min.js',
-            'jquery/jquery.maskedinput.min.js',
-            'jquery/jquery.maskMoney.min.js',
-            'slimscroll/jquery.slimscroll.min.js',
-            'js-cookie/js.cookie.js',
-            'toastr/toastr.min.js',
-            'sweetalert/sweetalert.min.js'    
-        ]);
+    <?php
+    echo assets_js('plugins', [
+        'jquery/jquery.min.js',
+        'jquery/jquery-form.js',
+        'bootstrap/js/bootstrap.bundle.min.js',
+        'jquery/jquery.maskedinput.min.js',
+        'jquery/jquery.maskMoney.min.js',
+        'slimscroll/jquery.slimscroll.min.js',
+        'js-cookie/js.cookie.js',
+        'toastr/toastr.min.js',
+        'sweetalert/sweetalert.min.js'
+    ]);
 
-        if(!empty($scripts) || isset($scripts)):
-            foreach($scripts as $script => $value) :
-                echo assets_js($value['dir'], $value['file']);
-            endforeach;
-        endif;
-        
-        echo assets_js('admin/js', [
-            'default.min.js',
-            'apps.js'
-        ]);
-        
-        echo assets_js('js', 'boot.js');
+    if (!empty($scripts) || isset($scripts)) :
+        foreach ($scripts as $script => $value) :
+            echo assets_js($value['dir'], $value['file']);
+        endforeach;
+    endif;
 
-        echo assets_js('admin/js', [
-            'function.js',
-            'send.js'
-        ]);
-    ?>    
+    echo assets_js('admin/js', [
+        'default.min.js',
+        'apps.js'
+    ]);
+
+    echo assets_js('js', 'boot.js');
+
+    echo assets_js('admin/js', [
+        'function.js',
+        'send.js'
+    ]);
+    ?>
     <!-- ================== END BASE JS ================== -->
 
     <script>

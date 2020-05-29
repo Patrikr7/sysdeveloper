@@ -84,6 +84,12 @@ $route['admin/permissions/update']['post'] = 'permission/update';
 $route['admin/permissionsgroup/create']['post'] = 'permissiongroup/create';
 $route['admin/permissionsgroup/update']['post'] = 'permissiongroup/update';
 
+// POSTS
+$route['admin/posts'] = 'post/page_index';
+$route['admin/posts/new'] = 'post/page_create';
+$route['admin/posts/view/(:any)'] = 'post/page_update/$1';
+$route['admin/posts/(:any)'] = 'post/page_index/$1';
+
 // PAGES
 $route['admin/page'] = 'page';
 $route['admin/page/new'] = 'page/page_create';
@@ -95,7 +101,7 @@ $route['admin/configuration/update']['post'] = 'configuration/update';
 
 // PAGES SITE
 $route['default_controller'] = 'website';
-$route['([a-zA-Z0-9-]+)'] = 'website/page/$1';
+$route['(:any)'] = 'website/page/$1';
 
 // ERRO 404
 $route['404_override'] = 'error404';

@@ -43,6 +43,24 @@
                     </ul>
                 </li>
             <?php endif; ?>
+			
+            <?php if ($this->user->hasPermission('view_post') && intval(getenv('SIS_POST')) === 1) : ?>
+                <li class="has-sub <?php echo (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "PostActive") ? "active" : ""); ?>">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fas fa-rss"></i>
+                        <span>Artigos</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="<?php echo (!empty($menuActive["subPage"]) && ($menuActive["subPage"] == "PageHome") ? "active" : ""); ?>">
+                            <a href="<?php echo base_url('admin/posts'); ?>" title="Ver Artigos">Ver Artigos</a>
+                        </li>
+                        <li class="<?php echo (!empty($menuActive["subPage"]) && ($menuActive["subPage"] == "PostCreate") ? "active" : ""); ?>">
+                            <a href="<?php echo base_url('admin/posts/new'); ?>" title="Novo Artigo">Novo Artigo</a>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
 
             <?php if ($this->user->hasPermission('view_user')) : ?>
                 <li class="has-sub <?php echo (!empty($menuActive["menuPage"]) && ($menuActive["menuPage"] == "UserActive") ? "active" : ""); ?>">

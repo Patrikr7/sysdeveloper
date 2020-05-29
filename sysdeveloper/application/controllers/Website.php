@@ -27,7 +27,6 @@ class Website extends CI_Controller
 
 	public function page($slug)
 	{
-		$pages = $this->pages->getPages();
 		$page  = $this->pages->getPageUrl($slug);
 
 		if($page):
