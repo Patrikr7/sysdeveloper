@@ -17,7 +17,7 @@ class Page_model extends CI_Model
                 ->where('page_parent IS NULL OR page_parent = 0')
                 ->order_by('page_title', 'ASC');
             return $this->db->get()->result_array();
-        
+
         else :
             $this->db->select('*')
                 ->from($this->table)
@@ -25,7 +25,7 @@ class Page_model extends CI_Model
                 ->where('page_parent IS NULL OR page_parent = 0')
                 ->order_by('page_title', 'ASC');
             return $this->db->get()->result_array();
-        
+
         endif;
     }
 
@@ -44,15 +44,9 @@ class Page_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getPermissionName($name)
+    public function getTitle($title)
     {
-        return $this->db->get_where($this->table, array('p_name' => $name))->row();
-    }
-
-    public function permission_where_in($params)
-    {
-        $this->db->select('p_name')->from($this->table)->where("p_id IN($params)");
-        return $this->db->get()->result_array();
+        return $this->db->get_where($this->table, array('page_title' => $title))->row();
     }
 
     public function create($data)
@@ -68,14 +62,20 @@ class Page_model extends CI_Model
 
     public function update($data)
     {
-        $this->db->where('p_id', $data['p_id']);
-        unset($data['p_id']);
-        $this->db->update($this->table, $data);
+        if ($this->user->hasPermission('update_page1')) :
+            $this->db->where('page_id', $data['page_id']);
+            unset($data['page_id']);
+            $this->db->update($this->table, $data);
 
-        if ($this->db->affected_rows() === 0 || $this->db->affected_rows() > 0) :
-            return true;
+            if ($this->db->affected_rows() === 0 || $this->db->affected_rows() === 1) :
+                return true;
+            else :
+                return false;
+            endif;
+
         else :
-            return false;
+            return 'denied';
+
         endif;
     }
 }

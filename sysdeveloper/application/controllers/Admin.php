@@ -13,13 +13,20 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
-		$dados = [
-			'title'   => 'Painel',
-			'title_page' => 'Painel Administrativo - ' . getenv('SIS_TITLE'),
-			'user' => $this->user->getUserId($this->session->userOnline['user_id']),
-			'menuActive' => ["menuPage" => "dash"]
-		];
+		if ($this->user->hasPermission('view_user')) :
+			$dados = [
+				'title'   => 'Painel',
+				'title_page' => 'Painel Administrativo - ' . getenv('SIS_TITLE'),
+				'user' => $this->user->getUserId($this->session->userOnline['user_id']),
+				'menuActive' => ["menuPage" => "dash"]
+			];
 
-		$this->template->load('admin/template/template', 'admin/home', $dados);
+			$this->template->load('admin/template/template', 'admin/home', $dados);
+
+		else :
+			redirect('admin/nopermission', 'refresh');
+			die;
+
+		endif;
 	}
 }

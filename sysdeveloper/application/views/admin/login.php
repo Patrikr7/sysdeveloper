@@ -62,7 +62,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!-- end login-header -->
                 <!-- begin login-content -->
                 <div class="login-content">
-                    <form id="form_login" class="margin-bottom-0" name="form_login" method="post" action="login/access" enctype="multipart/form-data">
+                    <?php echo form_open_multipart('admin/login/access', 'class="form-horizontal margin-bottom-0" id="form_login" role="form"'); ?>
                         <div class="form-group m-b-15">
                             <input class="form-control form-control-lg" type="text" id="user_login" name="user_login" placeholder="Login">
                         </div>

@@ -19,8 +19,8 @@
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<i class="fa fa-info-circle"></i> Informações da Página
-				</div>            
-				<form class="form-horizontal" id="form" method="post" action="" enctype="multipart/form-data">
+				</div>
+				<?php echo form_open_multipart('admin/page/create', 'class="form-horizontal" id="form"'); ?>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-12 form-group">

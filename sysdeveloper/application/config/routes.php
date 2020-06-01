@@ -94,6 +94,8 @@ $route['admin/posts/(:any)'] = 'post/page_index/$1';
 $route['admin/page'] = 'page';
 $route['admin/page/new'] = 'page/page_create';
 $route['admin/page/view/(:any)'] = 'page/page_update/$1';
+$route['admin/page/create']['post'] = 'page/create';
+$route['admin/page/update']['post'] = 'page/update';
 
 // CONFIGURATIONS GERAL
 $route['admin/configuration'] = 'configuration';
